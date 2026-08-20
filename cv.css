@@ -65,3 +65,91 @@
   }
   .engine-inspector{grid-column:1 / -1;grid-row:auto;margin-top:4px}
 }
+
+/* =========================================================
+   CV DIGITAL — responsive téléphone & tablette
+   Aucun changement au-dessus de 1024 px.
+   ========================================================= */
+@media (max-width: 1024px) {
+  .cv-hero { gap:34px; padding-top:48px; }
+  .cv-hero h1 { font-size:clamp(4rem,10vw,6rem); }
+  .system-window { max-width:760px; width:100%; margin-inline:auto; }
+  .cv-profile-grid { grid-template-columns:1fr 1fr; }
+  .profile-card-main { grid-column:1 / -1; }
+}
+
+@media (max-width: 950px) {
+  .cv-hero { padding-top:34px; }
+  .cv-hero-system { order:2; }
+  .profile-engine { min-height:580px; }
+  .career-detail { min-height:0; }
+  .training-pipeline { gap:12px; }
+  .pipeline-arrow { transform:rotate(90deg); min-height:26px; }
+}
+
+@media (max-width: 760px) {
+  .cv-actions { flex-direction:column; align-items:stretch; }
+  .cv-actions .button { width:100%; }
+  .identity-strip { grid-template-columns:1fr; }
+  .identity-strip>div { border-right:0; border-bottom:1px solid var(--line); }
+  .identity-strip>div:last-child { border-bottom:0; }
+
+  /* Sur mobile, le workflow devient une séquence claire et sans chevauchement. */
+  .profile-engine {
+    min-height:0;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto;
+    gap:10px;
+    padding:16px;
+  }
+  .engine-lines { display:none !important; }
+  .engine-node {
+    grid-column:auto!important;
+    grid-row:auto!important;
+    width:100%;
+    max-width:none;
+    min-height:92px;
+    margin:0;
+  }
+  .engine-inspector { grid-column:1/-1; margin-top:4px; padding:16px; }
+
+  .cv-profile-grid { grid-template-columns:1fr; }
+  .profile-card-main { grid-column:auto; }
+  .profile-card { padding:23px; }
+  .console-nav { padding:8px; }
+  .console-body { padding:14px; }
+  .skill-map.active { grid-template-columns:1fr; }
+
+  .career-layout { gap:14px; }
+  .career-rail { display:grid; grid-template-columns:1fr 1fr; }
+  .career-step { grid-template-columns:1fr; gap:4px; min-height:112px; align-content:center; }
+  .career-step i { display:none; }
+  .career-detail { padding:22px; }
+  .career-detail h3 { font-size:1.55rem; }
+  .career-detail-top { gap:12px; align-items:flex-start; }
+  .career-state { white-space:nowrap; }
+
+  .training-node { padding:22px; }
+  .extra-grid { grid-template-columns:1fr; }
+}
+
+@media (max-width: 480px) {
+  .cv-hero h1 { font-size:clamp(3.25rem,17vw,4.6rem); }
+  .cv-role { font-size:1.15rem; }
+  .cv-system-label { font-size:.64rem; letter-spacing:.09em; }
+  .identity-strip strong { font-size:.82rem; }
+
+  .profile-engine { grid-template-columns:1fr; }
+  .engine-inspector { grid-column:1; }
+  .engine-node { min-height:0; }
+
+  .career-rail { grid-template-columns:1fr; }
+  .career-step { min-height:0; grid-template-columns:90px 1fr; }
+  .career-year { align-self:start; padding-top:2px; }
+  .career-detail-top { flex-direction:column; }
+  .career-detail ul { padding-left:20px; }
+
+  .console-nav { gap:6px; scroll-snap-type:x proximity; }
+  .skill-tab { scroll-snap-align:start; }
+  .extra-grid article { padding:17px; }
+}
