@@ -1,4 +1,4 @@
-# CV interactif — V2.6 complète
+# CV interactif — V2.7 complète
 
 Version locale du portfolio de David Genty.
 
