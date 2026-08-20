@@ -1,6 +1,6 @@
 const engineContent = {
   source: {
-    title: '20 ans terrain',
+    title: '20 ans de terrain',
     text: 'Rigueur, procédures, coordination et prise de décision dans des environnements sensibles.'
   },
   analysis: {
