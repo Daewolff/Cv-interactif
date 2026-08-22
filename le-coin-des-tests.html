@@ -873,6 +873,20 @@
       transform: rotate(182deg);
     }
 
+  
+    /* Présentation simplifiée des tests : petites cartes prêtes à s'aligner côte à côte */
+    .tests-grid-simple{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+      gap: 18px;
+      justify-content: start;
+    }
+
+    .tests-grid-simple .station{
+      width: 100%;
+      max-width: 340px;
+    }
+
   </style>
 </head>
 <body>
@@ -926,7 +940,7 @@
           <h2>Une vue simple, pour avancer étape par étape.</h2>
         </div>
 
-        <div class="stations" style="grid-template-columns: 1fr;">
+        <div class="stations tests-grid-simple">
           <article class="station">
             <div class="kicker">
               <span class="index">01</span>
