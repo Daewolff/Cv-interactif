@@ -89,7 +89,7 @@ const careerData = {
     points: [
       'Gestion du poste de sécurité.',
       'Relais entre le client et la hiérarchie.',
-      'Assistance à des personnes.',
+      'Assistance à personne.',
       'Participation à l’ouverture au public en octobre 2012.'
     ],
     tags: ['Management', 'Relation client', 'Assistance']
