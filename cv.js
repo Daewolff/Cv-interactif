@@ -95,7 +95,7 @@ const careerData = {
     tags: ['Management', 'Relation client', 'Assistance']
   },
   goron: {
-    years: '2006 — 2011', state: 'encadrement', title: 'Agent de Sécurité Incendie & Chef d’Équipe de Sécurité Incendie', location: 'Goron S.A / Lancry Protection Sécurité · Groupama Noisy-le-Grand / Paris 8',
+    years: '2006 — 2011', state: 'encadrement', title: 'SSIAP 1 & SSIAP 2', location: 'Goron S.A / Lancry Protection Sécurité · Groupama Noisy-le-Grand / Paris 8',
     points: [
       'Assistance directe du responsable de sécurité.',
       'Intérim de son poste lors de ses absences sur le site de Noisy-le-Grand.',
