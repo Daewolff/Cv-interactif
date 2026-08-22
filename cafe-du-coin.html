@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Le Café du Coin — démonstrateur de commande sur tablette par David Genty." />
+  <meta name="theme-color" content="#090b10" />
+  <title>Le Café du Coin — David Genty</title>
+  <style>
+    :root{
+      --bg:#090b10;
+      --bg2:#0e131c;
+      --panel:#131a26;
+      --panel2:#101722;
+      --line:rgba(255,255,255,.08);
+      --line-strong:rgba(255,255,255,.14);
+      --text:#eef2ff;
+      --muted:#aab3c7;
+      --green:#44d7b6;
+      --lime:#d6ff6b;
+      --violet:#7c8cff;
+      --orange:#ffb36b;
+      --shadow:0 28px 70px rgba(0,0,0,.38);
+      --radius:28px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(124,140,255,.16), transparent 24%),
+        radial-gradient(circle at 100% 20%, rgba(68,215,182,.10), transparent 20%),
+        radial-gradient(circle at 50% 100%, rgba(255,179,107,.08), transparent 22%),
+        linear-gradient(180deg, #090b10 0%, #0b0f16 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    .ambient,
+    .ambient::before,
+    .ambient::after{
+      position:fixed;
+      border-radius:999px;
+      filter:blur(60px);
+      pointer-events:none;
+      z-index:-2;
+    }
+    .ambient{
+      width:320px;height:320px;top:8%;left:-60px;
+      background:rgba(124,140,255,.20);
+    }
+    .ambient::before{
+      content:"";
+      width:300px;height:300px;right:-120px;top:260px;position:fixed;
+      background:rgba(68,215,182,.14);
+    }
+    .ambient::after{
+      content:"";
+      width:260px;height:260px;left:35%;bottom:-80px;position:fixed;
+      background:rgba(255,179,107,.10);
+    }
+
+    .noise{
+      position:fixed; inset:0; pointer-events:none; z-index:-1; opacity:.06;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+    }
+
+    .site-header{
+      width:min(calc(100% - 32px), var(--max));
+      margin:18px auto 0;
+      padding:14px 18px;
+      border:1px solid var(--line);
+      background:rgba(8,11,17,.62);
+      backdrop-filter:blur(16px);
+      border-radius:999px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:24px;
+      position:sticky;
+      top:14px;
+      z-index:50;
+      box-shadow:0 10px 28px rgba(0,0,0,.18);
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:14px;
+      text-decoration:none; color:var(--text);
+      min-width:0;
+    }
+    .brand-mark{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      font-weight:800; letter-spacing:.04em;
+      background:linear-gradient(135deg, rgba(124,140,255,.30), rgba(68,215,182,.22));
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .brand-copy{display:flex; flex-direction:column; line-height:1.05}
+    .brand-copy strong{font-size:.94rem; letter-spacing:.08em}
+    .brand-copy small{font-size:.76rem;color:var(--muted)}
+
+    .main-nav{display:flex; gap:14px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    .main-nav a{
+      text-decoration:none; color:var(--muted); font-size:.95rem;
+      padding:10px 12px; border-radius:999px; border:1px solid transparent; transition:.2s ease;
+    }
+    .main-nav a:hover,
+    .main-nav a.active{
+      color:var(--text); background:rgba(255,255,255,.04); border-color:var(--line);
+    }
+    .main-nav .nav-cta{
+      color:var(--text);
+      background:linear-gradient(180deg, rgba(68,215,182,.10), rgba(68,215,182,.04));
+      border-color:rgba(68,215,182,.22);
+    }
+
+    .nav-toggle{
+      display:none;
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      align-items:center;justify-content:center;flex-direction:column;gap:5px;
+    }
+    .nav-toggle span{width:18px;height:2px;border-radius:999px;background:var(--text);display:block}
+
+    .page-shell{
+      width:min(calc(100% - 32px), var(--max));
+      margin:38px auto 90px;
+    }
+
+    .section-shell{
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(18,24,36,.88), rgba(12,16,24,.90));
+      border-radius:36px;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      position:relative;
+      margin-top:28px;
+    }
+    .section-shell::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(circle at top right, rgba(124,140,255,.10), transparent 30%),
+        linear-gradient(90deg, transparent, rgba(255,255,255,.02), transparent);
+      pointer-events:none;
+    }
+    .section-inner{position:relative; z-index:1; padding:34px}
+
+    .eyebrow{
+      margin:0 0 12px; color:#d0d7e6; font-size:.78rem;
+      text-transform:uppercase; letter-spacing:.18em;
+      display:flex; align-items:center; gap:10px;
+    }
+    .eyebrow span{
+      width:32px;height:2px;border-radius:999px;
+      background:linear-gradient(90deg, var(--green), var(--lime));
+      display:inline-block;
+    }
+    h1,h2,h3{margin:0}
+    h1{
+      font-size:clamp(2.6rem, 6vw, 4.9rem);
+      line-height:.98; letter-spacing:-.04em;
+    }
+    h1 em{
+      font-style:normal;
+      background:linear-gradient(135deg, #ffb36b 0%, #d6ff6b 35%, #44d7b6 70%, #7c8cff 100%);
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+    }
+    h2{
+      font-size:clamp(1.8rem, 3vw, 2.8rem);
+      line-height:1.05; letter-spacing:-.03em;
+    }
+    h3{
+      font-size:clamp(1.08rem, 2vw, 1.3rem);
+      letter-spacing:-.02em;
+      line-height:1.1;
+    }
+    p{margin:0; color:var(--muted); line-height:1.7}
+
+    .hero{
+      display:grid; grid-template-columns:.88fr 1.12fr; gap:28px; align-items:center;
+    }
+    .hero-copy{display:flex; flex-direction:column; gap:18px}
+    .hero-copy .lead{max-width:58ch; font-size:1.03rem}
+    .hero-actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:4px}
+    .button{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      text-decoration:none; color:var(--text); font-weight:600;
+      padding:14px 18px; border-radius:16px;
+      border:1px solid var(--line);
+      transition:.22s ease;
+      background:rgba(255,255,255,.03);
+    }
+    .button:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.16)}
+    .button-primary{
+      background:linear-gradient(135deg, rgba(255,179,107,.18), rgba(68,215,182,.16));
+      border-color:rgba(255,179,107,.20);
+    }
+    .button-ghost{background:rgba(255,255,255,.03)}
+    .button.small{padding:12px 14px; border-radius:14px; font-size:.94rem}
+
+    .status-row{display:flex; flex-wrap:wrap; gap:10px 12px}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:#d4dced; font-size:.92rem;
+    }
+    .chip i{
+      width:8px;height:8px;border-radius:999px;background:var(--green);display:inline-block;
+      box-shadow:0 0 0 6px rgba(68,215,182,.10);
+    }
+
+    .device-stage{
+      display:flex; justify-content:center; align-items:center; min-height:720px;
+      position:relative;
+      padding:8px 0;
+    }
+    .device-stage::before{
+      content:"";
+      position:absolute;
+      width:380px;height:380px;border-radius:999px;
+      background:radial-gradient(circle, rgba(255,179,107,.10), transparent 70%);
+      top:40px; right:30px; pointer-events:none;
+    }
+
+    .tablet{
+      width:min(100%, 660px);
+      aspect-ratio: 4 / 3;
+      border-radius:34px;
+      padding:20px;
+      position:relative;
+      background:
+        linear-gradient(160deg, rgba(36,43,56,.98), rgba(20,25,36,.98)),
+        #11161f;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:
+        0 34px 90px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .tablet::before{
+      content:"";
+      position:absolute; inset:12px;
+      border-radius:26px;
+      border:1px solid rgba(255,255,255,.06);
+      pointer-events:none;
+    }
+    .camera-dot{
+      position:absolute; top:10px; left:50%; transform:translateX(-50%);
+      width:10px;height:10px;border-radius:999px;
+      background:#0b1017;border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 0 0 6px rgba(0,0,0,.22);
+    }
+    .tablet-screen{
+      width:100%; height:100%;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:
+        radial-gradient(circle at top right, rgba(255,179,107,.10), transparent 20%),
+        linear-gradient(180deg, rgba(253,251,246,.99), rgba(247,243,236,.99));
+      color:#202530;
+      display:grid;
+      grid-template-rows:auto auto 1fr auto;
+      position:relative;
+    }
+    .tablet-screen::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:
+        linear-gradient(rgba(0,0,0,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.018) 1px, transparent 1px);
+      background-size:22px 22px;
+      opacity:.35;
+      pointer-events:none;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,.18));
+    }
+
+    .screen-top{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:16px 18px 10px;
+      border-bottom:1px solid rgba(25,33,44,.08);
+      background:rgba(255,255,255,.45);
+      backdrop-filter:blur(8px);
+    }
+    .screen-top .brandline{
+      display:flex; align-items:center; gap:12px;
+    }
+    .cafe-logo{
+      width:42px;height:42px;border-radius:14px;
+      display:grid; place-items:center;
+      color:#fff;
+      font-size:1.15rem;
+      background:linear-gradient(135deg, #2f2320, #6a4c37);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
+    }
+    .brandline strong{
+      display:block; font-size:1.02rem; color:#241f1c;
+    }
+    .brandline small{
+      display:block; color:#63554b; font-size:.8rem;
+    }
+    .screen-badge{
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(32,37,48,.08);
+      background:#fffdf9; color:#594d45; font-size:.82rem; font-weight:600;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .screen-badge i{
+      width:8px;height:8px;border-radius:999px;background:var(--green);display:inline-block;
+      box-shadow:0 0 0 5px rgba(68,215,182,.12);
+    }
+
+    .screen-heading{
+      padding:18px 22px 10px;
+      display:flex; justify-content:space-between; align-items:flex-start; gap:18px;
+    }
+    .screen-heading h2{
+      font-size:clamp(1.7rem, 3vw, 2.4rem);
+      color:#241f1c;
+      line-height:1;
+      margin-bottom:8px;
+    }
+    .screen-heading p{color:#5b524c; max-width:52ch; font-size:.98rem}
+    .screen-meta{
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .soft-pill{
+      padding:9px 12px; border-radius:999px;
+      background:rgba(108,78,56,.08); color:#5f5146;
+      border:1px solid rgba(94,82,72,.10); font-size:.84rem; font-weight:600;
+    }
+
+    .screen-grid{
+      display:grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap:18px;
+      padding:14px 22px 18px;
+      min-height:0;
+    }
+    .menu-pane,
+    .form-pane{
+      border:1px solid rgba(30,36,44,.08);
+      border-radius:24px;
+      background:rgba(255,255,255,.62);
+      box-shadow:0 16px 28px rgba(26,18,11,.05);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .menu-pane{
+      padding:16px;
+      display:flex; flex-direction:column; gap:12px;
+    }
+    .menu-pane .pane-title,
+    .form-pane .pane-title{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      margin-bottom:6px;
+    }
+    .pane-title strong{
+      color:#241f1c; font-size:.98rem;
+    }
+    .pane-title span{
+      color:#6a5b50; font-size:.8rem; text-transform:uppercase; letter-spacing:.08em;
+    }
+
+    .menu-items{display:grid; gap:10px}
+    .menu-item{
+      display:grid; grid-template-columns:auto 1fr auto; gap:12px; align-items:center;
+      padding:12px;
+      border-radius:18px;
+      border:1px solid rgba(31,37,45,.08);
+      background:rgba(255,255,255,.68);
+    }
+    .menu-icon{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(255,179,107,.18), rgba(124,140,255,.16));
+      font-size:1.2rem;
+    }
+    .menu-item strong{display:block; color:#241f1c; margin-bottom:3px; font-size:.95rem}
+    .menu-item small{display:block; color:#695b51; font-size:.82rem}
+    .price{
+      color:#241f1c; font-weight:700; white-space:nowrap;
+      padding:8px 10px; border-radius:12px; background:rgba(108,78,56,.06);
+      border:1px solid rgba(94,82,72,.08);
+      font-size:.9rem;
+    }
+
+    .form-pane{
+      padding:18px;
+      display:flex; flex-direction:column;
+      min-height:100%;
+    }
+    .placeholder-shell{
+      margin-top:6px;
+      border:2px dashed rgba(55,67,80,.16);
+      border-radius:20px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.56));
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      text-align:center;
+      padding:26px;
+      min-height:100%;
+      position:relative;
+      overflow:hidden;
+    }
+    .placeholder-shell::before{
+      content:"";
+      position:absolute; width:160px;height:160px;border-radius:999px;
+      background:radial-gradient(circle, rgba(68,215,182,.09), transparent 70%);
+      top:-40px; left:-40px;
+    }
+    .placeholder-shell::after{
+      content:"";
+      position:absolute; width:150px;height:150px;border-radius:999px;
+      background:radial-gradient(circle, rgba(124,140,255,.08), transparent 70%);
+      bottom:-40px; right:-30px;
+    }
+    .placeholder-icon{
+      width:72px;height:72px;border-radius:22px;
+      display:grid; place-items:center;
+      font-size:1.7rem;
+      color:#fff;
+      background:linear-gradient(135deg, #44d7b6, #7c8cff);
+      box-shadow:0 18px 35px rgba(61,103,181,.20);
+      position:relative;
+      z-index:1;
+    }
+    .placeholder-shell h3{
+      color:#241f1c;
+      font-size:1.28rem;
+      position:relative;
+      z-index:1;
+    }
+    .placeholder-shell p{
+      color:#5e544d;
+      max-width:35ch;
+      position:relative;
+      z-index:1;
+    }
+    .tally-frame{
+      width:100%;
+      border:1px dashed rgba(31,37,45,.14);
+      background:rgba(249,247,242,.74);
+      border-radius:18px;
+      padding:16px;
+      text-align:left;
+      position:relative;
+      z-index:1;
+    }
+    .tally-frame strong{
+      display:block; color:#241f1c; margin-bottom:8px; font-size:.95rem;
+    }
+    .tally-frame ul{
+      margin:0; padding-left:18px; color:#5f544d;
+      line-height:1.7; font-size:.92rem;
+    }
+
+    .screen-footer{
+      padding:14px 20px 18px;
+      display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+      border-top:1px solid rgba(25,33,44,.08);
+      background:rgba(255,255,255,.45);
+    }
+    .screen-footer .hint{
+      color:#66584d; font-size:.9rem;
+    }
+    .mini-action{
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+
+    .info-grid{
+      display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px;
+    }
+    .info-card{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(20,27,39,.96), rgba(13,18,27,.95));
+      padding:24px;
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+    }
+    .info-card::before{
+      content:"";
+      position:absolute; width:140px;height:140px;border-radius:999px;
+      right:-40px; top:-40px;
+      background:radial-gradient(circle, rgba(124,140,255,.15), transparent 70%);
+      pointer-events:none;
+    }
+    .info-card .mini{
+      font-size:.77rem; text-transform:uppercase; letter-spacing:.15em; color:#d3dced;
+      display:flex; align-items:center; gap:9px; margin-bottom:12px;
+    }
+    .info-card .mini::before{
+      content:""; width:8px;height:8px;border-radius:999px; background:var(--orange); display:inline-block;
+      box-shadow:0 0 0 6px rgba(255,179,107,.10);
+    }
+    .info-card p{margin-top:10px}
+    .bullet-list{display:grid; gap:10px; margin-top:14px}
+    .bullet{
+      display:flex; gap:10px; align-items:flex-start;
+      color:var(--muted); line-height:1.55;
+    }
+    .bullet i{
+      width:20px;height:20px;border-radius:999px; flex:0 0 20px;
+      border:1px solid rgba(68,215,182,.28);
+      background:rgba(68,215,182,.08);
+      position:relative; margin-top:2px;
+    }
+    .bullet i::after{
+      content:""; position:absolute; inset:5px; border-radius:999px; background:var(--green);
+      box-shadow:0 0 0 6px rgba(68,215,182,.10);
+    }
+
+    .contact-panel{
+      display:grid; grid-template-columns:1fr auto; align-items:center; gap:20px;
+    }
+    .contact-links{
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end;
+    }
+
+    footer{
+      width:min(calc(100% - 32px), var(--max));
+      margin:0 auto 40px;
+      display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+    footer a{color:var(--text); text-decoration:none}
+
+    @media (max-width: 1080px){
+      .hero{grid-template-columns:1fr}
+      .device-stage{min-height:auto}
+      .info-grid{grid-template-columns:1fr}
+      .tablet{max-width:780px}
+    }
+
+    @media (max-width: 860px){
+      .site-header{
+        border-radius:26px;
+        padding:14px;
+        align-items:flex-start;
+      }
+      .nav-toggle{display:flex}
+      .main-nav{
+        display:none; width:100%; padding-top:12px;
+        flex-direction:column; align-items:stretch;
+      }
+      .main-nav.open{display:flex}
+      .main-nav a{width:100%; text-align:center}
+
+      .screen-grid{grid-template-columns:1fr}
+      .contact-panel{grid-template-columns:1fr}
+      .contact-links{justify-content:flex-start}
+    }
+
+    @media (max-width: 620px){
+      .site-header{width:min(calc(100% - 20px), var(--max)); top:10px}
+      .page-shell{width:min(calc(100% - 20px), var(--max)); margin-top:22px}
+      .section-inner{padding:22px 18px}
+      .screen-top,
+      .screen-heading,
+      .screen-grid,
+      .screen-footer{padding-left:16px; padding-right:16px}
+      .screen-heading{flex-direction:column; align-items:flex-start}
+      .screen-meta{justify-content:flex-start}
+      .tablet{padding:14px; border-radius:28px}
+      .tablet-screen{border-radius:20px}
+      .hero-actions, .contact-links{width:100%}
+      .button{width:100%}
+      .chip{width:100%; justify-content:center}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto}
+    }
+  
+    /* ===== V2 TABLETTE : rendu plus réaliste + écran réellement manipulable ===== */
+    .device-stage{
+      min-height:760px;
+      perspective:1400px;
+    }
+
+    .tablet{
+      width:min(100%, 690px);
+      aspect-ratio:auto;
+      height:720px;
+      border-radius:38px;
+      padding:18px;
+      background:
+        linear-gradient(145deg, #303746 0%, #171d28 42%, #0e131b 100%);
+      border:1px solid rgba(255,255,255,.13);
+      box-shadow:
+        0 36px 90px rgba(0,0,0,.46),
+        0 8px 22px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.12),
+        inset 0 -1px 0 rgba(0,0,0,.7);
+      transform:rotateY(-2deg) rotateX(1deg);
+      transform-style:preserve-3d;
+    }
+
+    .tablet::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      bottom:7px;
+      width:78px;
+      height:4px;
+      border-radius:999px;
+      transform:translateX(-50%);
+      background:rgba(255,255,255,.16);
+      box-shadow:0 1px 0 rgba(0,0,0,.5);
+    }
+
+    .camera-dot{
+      top:7px;
+      width:9px;
+      height:9px;
+      background:#05080d;
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,.30),
+        inset 0 0 0 2px rgba(33,56,72,.25);
+    }
+
+    .tablet-screen{
+      display:block;
+      height:100%;
+      overflow-y:auto;
+      overflow-x:hidden;
+      overscroll-behavior:contain;
+      scrollbar-width:thin;
+      scrollbar-color:#8c765f rgba(66,55,45,.08);
+      cursor:grab;
+      user-select:none;
+      touch-action:pan-y;
+      scroll-behavior:smooth;
+      border-radius:24px;
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.06),
+        inset 0 0 28px rgba(86,65,48,.04);
+    }
+
+    .tablet-screen.is-dragging{
+      cursor:grabbing;
+      scroll-behavior:auto;
+    }
+
+    .tablet-screen::-webkit-scrollbar{
+      width:11px;
+    }
+
+    .tablet-screen::-webkit-scrollbar-track{
+      background:rgba(91,72,57,.06);
+    }
+
+    .tablet-screen::-webkit-scrollbar-thumb{
+      background:linear-gradient(180deg, #9b836b, #6e5b49);
+      border-radius:999px;
+      border:3px solid rgba(250,247,240,.9);
+    }
+
+    .tablet-screen::-webkit-scrollbar-thumb:hover{
+      background:linear-gradient(180deg, #b1977d, #7c6651);
+    }
+
+    .screen-top{
+      position:sticky;
+      top:0;
+      z-index:8;
+    }
+
+    .screen-footer{
+      margin-top:8px;
+    }
+
+    .screen-grid{
+      min-height:720px;
+      align-items:stretch;
+    }
+
+    .menu-pane{
+      align-self:start;
+      position:sticky;
+      top:84px;
+    }
+
+    .form-pane{
+      min-height:620px;
+    }
+
+    .drag-hint{
+      position:absolute;
+      right:28px;
+      bottom:24px;
+      z-index:6;
+      pointer-events:none;
+      padding:9px 12px;
+      border-radius:999px;
+      background:rgba(12,16,23,.72);
+      border:1px solid rgba(255,255,255,.10);
+      color:#e7edf7;
+      font-size:.78rem;
+      letter-spacing:.04em;
+      backdrop-filter:blur(10px);
+      opacity:.88;
+      box-shadow:0 10px 24px rgba(0,0,0,.25);
+    }
+
+    .drag-hint strong{
+      color:var(--lime);
+      font-weight:700;
+    }
+
+    @media (max-width: 1080px){
+      .tablet{
+        max-width:780px;
+        height:700px;
+        transform:none;
+      }
+    }
+
+    @media (max-width: 700px){
+      .device-stage{
+        min-height:auto;
+      }
+
+      .tablet{
+        width:100%;
+        height:690px;
+        padding:12px;
+        border-radius:30px;
+      }
+
+      .tablet-screen{
+        border-radius:20px;
+      }
+
+      .drag-hint{
+        display:none;
+      }
+
+      .screen-grid{
+        min-height:auto;
+      }
+
+      .menu-pane{
+        position:relative;
+        top:auto;
+      }
+
+      .form-pane{
+        min-height:520px;
+      }
+    }
+
+  
+    /* ===== Intégration réelle du formulaire Tally ===== */
+    .tally-embed-shell{
+      width:100%;
+      min-height:588px;
+      border-radius:20px;
+      overflow:hidden;
+      background:rgba(255,255,255,.62);
+      border:1px solid rgba(31,37,45,.08);
+      box-shadow:0 14px 26px rgba(26,18,11,.05);
+      user-select:text;
+      cursor:auto;
+    }
+
+    .tally-embed-shell iframe{
+      display:block;
+      width:100%;
+      min-height:588px;
+      border:0;
+      background:transparent;
+      cursor:auto;
+    }
+
+    @media (max-width:700px){
+      .tally-embed-shell,
+      .tally-embed-shell iframe{
+        min-height:640px;
+      }
+    }
+
+  
+    /* Ajustement ciblé du menu produits : garantir la visibilité complète des prix */
+    .menu-item{
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
+    .menu-item > div:nth-child(2){
+      min-width: 0;
+    }
+
+    .menu-item strong,
+    .menu-item small{
+      overflow-wrap: anywhere;
+    }
+
+    .price{
+      white-space: nowrap;
+      flex-shrink: 0;
+      padding: 8px 9px;
+      font-size: .86rem;
+    }
+
+    @media (max-width: 700px){
+      .menu-item{
+        grid-template-columns: 40px minmax(0, 1fr) auto;
+        gap: 10px;
+      }
+
+      .price{
+        font-size: .82rem;
+        padding: 7px 8px;
+      }
+    }
+
+  
+    /* Finition carte du moment : titres sur une ligne, descriptions propres, plus d'espace visuel */
+    .screen-grid{
+      grid-template-columns: 1.12fr .98fr;
+    }
+
+    .menu-pane{
+      min-width: 0;
+    }
+
+    .menu-items{
+      gap: 9px;
+    }
+
+    .menu-item{
+      grid-template-columns: 40px minmax(0, 1fr) auto;
+      gap: 10px;
+      padding: 11px;
+    }
+
+    .menu-icon{
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      font-size: 1.08rem;
+    }
+
+    .menu-item strong{
+      font-size: .89rem;
+      line-height: 1.15;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .menu-item small{
+      display: block;
+      font-size: .76rem;
+      line-height: 1.25;
+      white-space: normal;
+      overflow-wrap: normal !important;
+      word-break: normal !important;
+      hyphens: none;
+      max-width: 100%;
+    }
+
+    .menu-item > div:nth-child(2){
+      min-width: 0;
+    }
+
+    .price{
+      min-width: 62px;
+      text-align: center;
+      white-space: nowrap;
+      padding: 8px 8px;
+      font-size: .82rem;
+      line-height: 1;
+    }
+
+    @media (max-width: 1080px){
+      .screen-grid{
+        grid-template-columns: 1.08fr .92fr;
+      }
+    }
+
+    @media (max-width: 860px){
+      .screen-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .menu-item strong{
+        font-size: .92rem;
+      }
+
+      .menu-item small{
+        font-size: .79rem;
+      }
+    }
+
+  
+    /* Finition Tally : légère réduction visuelle de l'embed pour afficher entièrement le bouton d'envoi */
+    .tally-embed-shell{
+      overflow: hidden;
+    }
+
+    .tally-embed-shell iframe{
+      transform: scale(.965);
+      transform-origin: top left;
+      width: 103.63% !important;
+    }
+
+    @media (max-width:700px){
+      .tally-embed-shell iframe{
+        transform: scale(.95);
+        width: 105.27% !important;
+      }
+    }
+
+  
+    /* Dernière finition Tally : formulaire plus petit et parfaitement centré */
+    .tally-embed-shell{
+      overflow:hidden;
+      padding:0 0 18px;
+    }
+
+    .tally-embed-shell iframe{
+      transform:scale(.90) !important;
+      transform-origin:top center !important;
+      width:111.12% !important;
+      margin-left:-5.56% !important;
+    }
+
+    @media (max-width:700px){
+      .tally-embed-shell{
+        padding-bottom:22px;
+      }
+
+      .tally-embed-shell iframe{
+        transform:scale(.88) !important;
+        width:113.64% !important;
+        margin-left:-6.82% !important;
+      }
+    }
+
+  
+    /* Correction interaction Tally : aucun scale sur l'iframe = zones cliquables parfaitement alignées */
+    .tally-embed-shell{
+      overflow: visible !important;
+      padding: 0 0 16px !important;
+    }
+
+    .tally-embed-shell iframe{
+      transform: none !important;
+      transform-origin: initial !important;
+      width: 100% !important;
+      margin-left: 0 !important;
+      min-height: 620px !important;
+    }
+
+    /* Donner davantage de largeur réelle au formulaire sans déformer l'iframe */
+    .screen-grid{
+      grid-template-columns: .88fr 1.22fr !important;
+      gap: 14px !important;
+    }
+
+    .menu-pane{
+      padding: 14px !important;
+    }
+
+    .form-pane{
+      padding: 14px !important;
+      min-width: 0;
+    }
+
+    @media (max-width: 860px){
+      .screen-grid{
+        grid-template-columns: 1fr !important;
+      }
+
+      .tally-embed-shell iframe{
+        width: 100% !important;
+        min-height: 660px !important;
+      }
+    }
+
+  
+    /* ===== Recalibrage global final de la tablette =====
+       Objectif : carte lisible + Tally confortable, sans décalage des zones cliquables. */
+
+    .device-stage{
+      min-height: 790px !important;
+    }
+
+    .tablet{
+      width: min(100%, 820px) !important;
+      height: 750px !important;
+    }
+
+    .screen-grid{
+      grid-template-columns: minmax(300px, .98fr) minmax(360px, 1.12fr) !important;
+      gap: 16px !important;
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+    }
+
+    .menu-pane{
+      padding: 13px !important;
+      min-width: 0 !important;
+    }
+
+    .menu-items{
+      gap: 8px !important;
+    }
+
+    .menu-item{
+      grid-template-columns: 36px minmax(0, 1fr) 60px !important;
+      gap: 9px !important;
+      padding: 10px !important;
+      min-width: 0 !important;
+    }
+
+    .menu-icon{
+      width: 36px !important;
+      height: 36px !important;
+      border-radius: 12px !important;
+      font-size: 1rem !important;
+    }
+
+    .menu-item > div:nth-child(2){
+      min-width: 0 !important;
+    }
+
+    .menu-item strong{
+      display: block !important;
+      font-size: .84rem !important;
+      line-height: 1.15 !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+      text-overflow: clip !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      hyphens: none !important;
+    }
+
+    .menu-item small{
+      display: block !important;
+      margin-top: 3px !important;
+      font-size: .69rem !important;
+      line-height: 1.28 !important;
+      white-space: normal !important;
+      word-break: normal !important;
+      overflow-wrap: normal !important;
+      hyphens: none !important;
+    }
+
+    .price{
+      width: 60px !important;
+      min-width: 60px !important;
+      padding: 7px 5px !important;
+      font-size: .78rem !important;
+      line-height: 1 !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+    }
+
+    .form-pane{
+      padding: 13px !important;
+      min-width: 0 !important;
+    }
+
+    /* Tally reste 100 % natif : pas de scale, donc zones cliquables exactes. */
+    .tally-embed-shell{
+      width: 100% !important;
+      overflow: visible !important;
+    }
+
+    .tally-embed-shell iframe{
+      width: 100% !important;
+      transform: none !important;
+      margin-left: 0 !important;
+      min-height: 620px !important;
+    }
+
+    @media (max-width: 1180px) and (min-width: 861px){
+      .tablet{
+        width: min(100%, 780px) !important;
+      }
+
+      .screen-grid{
+        grid-template-columns: minmax(280px, .94fr) minmax(340px, 1.06fr) !important;
+        gap: 13px !important;
+      }
+
+      .menu-item strong{
+        font-size: .80rem !important;
+      }
+
+      .menu-item small{
+        font-size: .66rem !important;
+      }
+
+      .price{
+        width: 56px !important;
+        min-width: 56px !important;
+        font-size: .74rem !important;
+      }
+    }
+
+    @media (max-width: 860px){
+      .tablet{
+        width: min(100%, 720px) !important;
+        height: 720px !important;
+      }
+
+      .screen-grid{
+        grid-template-columns: 1fr !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+
+      .menu-item{
+        grid-template-columns: 40px minmax(0,1fr) 64px !important;
+      }
+
+      .menu-item strong{
+        font-size: .92rem !important;
+      }
+
+      .menu-item small{
+        font-size: .78rem !important;
+      }
+
+      .price{
+        width: 64px !important;
+        min-width: 64px !important;
+        font-size: .82rem !important;
+      }
+    }
+
+    @media (max-width: 620px){
+      .tablet{
+        width: 100% !important;
+        height: 700px !important;
+      }
+
+      .menu-item strong{
+        font-size: .86rem !important;
+      }
+
+      .menu-item small{
+        font-size: .73rem !important;
+      }
+    }
+
+  
+    /* ===== Confirmation après envoi Tally ===== */
+    .order-confirmation{
+      margin-top: 12px;
+      padding: 13px 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(68,215,182,.22);
+      background:
+        linear-gradient(135deg, rgba(68,215,182,.10), rgba(214,255,107,.07)),
+        rgba(255,255,255,.72);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 24px rgba(26,18,11,.05);
+      animation: confirmationIn .35s ease both;
+    }
+
+    .order-confirmation[hidden]{
+      display: none !important;
+    }
+
+    .confirmation-icon{
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #44d7b6, #8ddf9a);
+      color: #0b1714;
+      font-weight: 900;
+      font-size: 1.1rem;
+      box-shadow: 0 10px 20px rgba(68,215,182,.18);
+    }
+
+    .confirmation-copy{
+      min-width: 0;
+    }
+
+    .confirmation-copy small{
+      display: block;
+      margin-bottom: 2px;
+      color: #5b6b64;
+      font-size: .68rem;
+      letter-spacing: .12em;
+      font-weight: 800;
+    }
+
+    .confirmation-copy strong{
+      display: block;
+      color: #202823;
+      font-size: .96rem;
+      line-height: 1.2;
+    }
+
+    .confirmation-summary{
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      margin-top: 5px;
+      color: #655b54;
+      font-size: .78rem;
+      line-height: 1.35;
+    }
+
+    .confirmation-summary span:not(:empty) + span:not(:empty)::before{
+      content: "·";
+      margin-right: 7px;
+      color: #8a7c72;
+    }
+
+    @keyframes confirmationIn{
+      from{
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to{
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .order-confirmation{
+        animation: none;
+      }
+    }
+
+  
+    .new-order-button{
+      margin-top: 9px;
+      padding: 8px 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(68,215,182,.22);
+      background: rgba(68,215,182,.08);
+      color: #24322d;
+      font: inherit;
+      font-size: .78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .new-order-button:hover{
+      background: rgba(68,215,182,.14);
+      transform: translateY(-1px);
+    }
+
+  
+    /* ===== Interaction finale : Tally reste 100% cliquable, confirmation indépendante ===== */
+    .tally-embed-shell,
+    .tally-embed-shell iframe{
+      position: relative;
+      z-index: auto;
+      pointer-events: auto;
+    }
+
+    .order-confirmation{
+      position: sticky;
+      bottom: 12px;
+      z-index: 60;
+      pointer-events: auto;
+      margin: 12px 8px 4px;
+      box-shadow: 0 18px 34px rgba(26,18,11,.16);
+    }
+
+    .order-confirmation[hidden]{
+      display: none !important;
+      pointer-events: none !important;
+    }
+
+    .new-order-button{
+      position: relative;
+      z-index: 61;
+      pointer-events: auto;
+      touch-action: manipulation;
+    }
+
+  
+    /* Correction ciblée : bouton Nouvelle commande cliquable sans toucher à Tally */
+    .form-pane{
+      position: relative;
+    }
+
+    .order-confirmation{
+      position: relative !important;
+      bottom: auto !important;
+      z-index: 20 !important;
+      isolation: isolate;
+      pointer-events: auto !important;
+    }
+
+    .new-order-button{
+      position: relative !important;
+      z-index: 21 !important;
+      pointer-events: auto !important;
+      cursor: pointer !important;
+      touch-action: manipulation;
+    }
+
+  
+    /* Correction strictement ciblée : la confirmation n'active jamais le mode "grab". */
+    .order-confirmation,
+    .order-confirmation *{
+      cursor: default !important;
+    }
+
+    .new-order-button{
+      cursor: pointer !important;
+      pointer-events: auto !important;
+    }
+
+  
+    /* Après validation, la carte de confirmation reste au-dessus de Tally. */
+    .order-confirmation:not([hidden]){
+      z-index: 999 !important;
+      pointer-events: auto !important;
+    }
+
+    .order-confirmation:not([hidden]) .new-order-button{
+      cursor: pointer !important;
+      pointer-events: auto !important;
+    }
+
+  
+    /* Nouvelle commande : simple lien natif = recharge la page et revient au formulaire */
+    a.new-order-button{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      text-decoration: none;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 9999;
+    }
+
+  
+    /* Nouvelle commande : lien natif dans le pied de tablette, hors de l'iframe Tally */
+    .footer-new-order{
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+
+    .screen-footer{
+      position: relative;
+      z-index: 1000;
+      pointer-events: auto;
+    }
+
+  
+    /* Bouton refresh minimal, hors iframe Tally */
+    .refresh-only{
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: inline-grid;
+      place-items: center;
+      text-decoration: none;
+      color: #24322d;
+      background: rgba(68,215,182,.10);
+      border: 1px solid rgba(68,215,182,.22);
+      font-size: 1.1rem;
+      font-weight: 800;
+      line-height: 1;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      position: relative;
+      z-index: 9999;
+      transition: .2s ease;
+    }
+
+    .refresh-only:hover{
+      background: rgba(68,215,182,.16);
+      transform: rotate(-12deg);
+    }
+
+    .screen-footer,
+    .mini-action{
+      position: relative;
+      z-index: 9998;
+      pointer-events: auto;
+    }
+
+    /* Ajustement présentation : titre au-dessus de la tablette */
+    .tablet-column{
+      min-width: 0;
+    }
+
+    .tablet-title{
+      margin: 0 0 18px;
+      white-space: nowrap;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      line-height: 1;
+      letter-spacing: -.04em;
+      text-align: center;
+    }
+
+    @media (max-width: 1080px){
+      .tablet-title{
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 620px){
+      .tablet-title{
+        white-space: normal;
+        text-align: left;
+      }
+    }
+
+  
+    /* ===== Ajustement présentation hero : texte compact, tablette prioritaire ===== */
+    .hero{
+      grid-template-columns: minmax(250px, .58fr) minmax(0, 1.42fr) !important;
+      gap: 18px !important;
+      align-items: start !important;
+    }
+
+    .hero-copy{
+      gap: 10px !important;
+      align-self: start !important;
+      padding-top: 0 !important;
+      max-width: 320px;
+    }
+
+    .hero-copy .eyebrow{
+      margin-bottom: 4px !important;
+      font-size: .70rem !important;
+      line-height: 1.35;
+    }
+
+    .hero-copy .lead{
+      max-width: 31ch !important;
+      font-size: .91rem !important;
+      line-height: 1.55 !important;
+    }
+
+    .hero-actions{
+      margin-top: 2px !important;
+    }
+
+    .hero-actions .button{
+      padding: 11px 14px !important;
+      font-size: .88rem !important;
+    }
+
+    .status-row{
+      gap: 7px !important;
+      margin-top: 2px;
+    }
+
+    .status-row .chip{
+      padding: 8px 10px !important;
+      font-size: .80rem !important;
+    }
+
+    .tablet-column{
+      width: 100%;
+      min-width: 0;
+    }
+
+    .tablet-title{
+      margin-bottom: 12px !important;
+    }
+
+    .device-stage{
+      width: 100%;
+      justify-content: flex-start !important;
+      padding-top: 0 !important;
+    }
+
+    .tablet{
+      width: min(100%, 820px) !important;
+      max-width: 100% !important;
+    }
+
+    @media (max-width: 1080px){
+      .hero{
+        grid-template-columns: 1fr !important;
+      }
+
+      .hero-copy{
+        max-width: 100%;
+      }
+
+      .hero-copy .lead{
+        max-width: 65ch !important;
+      }
+
+      .tablet-column{
+        width: 100%;
+      }
+
+      .device-stage{
+        justify-content: center !important;
+      }
+    }
+
+  
+    /* Ajustement final : recentrer visuellement le bloc de gauche par rapport à la tablette */
+    .hero{
+      align-items: center !important;
+    }
+
+    .hero-copy{
+      align-self: center !important;
+      justify-self: start;
+      transform: translateY(12px);
+    }
+
+    @media (max-width: 1080px){
+      .hero{
+        align-items: start !important;
+      }
+
+      .hero-copy{
+        align-self: start !important;
+        transform: none;
+      }
+    }
+
+  </style>
+  <script async src="https://tally.so/widgets/embed.js"></script>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html" aria-label="Retour au portfolio de David Genty">
+      <span class="brand-mark">DG</span>
+      <span class="brand-copy">
+        <strong>DAVID GENTY</strong>
+        <small>Le Café du Coin · Démonstrateur</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html">Portfolio</a>
+      <a href="le-coin-des-tests.html" class="active">Le coin des tests</a>
+      <a href="cv.html">CV digital</a>
+      <a href="cv-pdf.html">CV PDF</a>
+      <a href="#integration" class="nav-cta">Zone Tally</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="section-shell">
+      <div class="section-inner">
+        <div class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow"><span></span> Démonstrateur en construction · Tally · Airtable</p>
+            
+            <p class="lead">
+              Première station active du <strong>Coin des tests</strong> : une
+              <strong>tablette de prise de commande</strong> reliée à Tally et Airtable,
+              pour tester un parcours simple de commande et d’enregistrement.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-ghost" href="le-coin-des-tests.html">Retour au coin des tests</a>
+            </div>
+            <div class="status-row" aria-label="Statut du démonstrateur">
+              <span class="chip"><i></i> Structure prête</span>
+              <span class="chip"><i></i> Formulaire intégré</span>
+              <span class="chip"><i></i> Expérience tablette</span>
+            </div>
+          </div>
+
+          <div class="tablet-column">
+            <h1 class="tablet-title">Le <em>Café du Coin</em>.</h1>
+            <div class="device-stage" id="tablette">
+            <div class="tablet" aria-label="Maquette de tablette pour Le Café du Coin">
+              <span class="camera-dot" aria-hidden="true"></span>
+              <div class="drag-hint"><strong>Glisser</strong> pour faire défiler</div>
+
+              <div class="tablet-screen" id="tabletScreen">
+                <div class="screen-top">
+                  <div class="brandline">
+                    <div class="cafe-logo">☕</div>
+                    <div>
+                      <strong>Le Café du Coin</strong>
+                      <small>Commande sur tablette · Démonstration</small>
+                    </div>
+                  </div>
+                  <span class="screen-badge"><i></i> formulaire actif</span>
+                </div>
+
+                <div class="screen-heading">
+                  <div>
+                    <h2>Passez votre commande</h2>
+                    <p>
+                      Choisissez vos boissons et gourmandises, puis laissez le formulaire enregistrer votre commande.
+                    </p>
+                  </div>
+
+                </div>
+
+                <div class="screen-grid">
+                  <aside class="menu-pane" aria-label="Exemple de menu">
+                    <div class="pane-title">
+                      <strong>Carte du moment</strong>
+                      <span>exemple visuel</span>
+                    </div>
+
+                    <div class="menu-items">
+                      <div class="menu-item">
+                        <div class="menu-icon">☕</div>
+                        <div>
+                          <strong>Expresso</strong>
+                          <small>Court, intense, classique</small>
+                        </div>
+                        <span class="price">2,00 €</span>
+                      </div>
+
+                      <div class="menu-item">
+                        <div class="menu-icon">🥤</div>
+                        <div>
+                          <strong>Café allongé</strong>
+                          <small>Plus doux, plus long, plus léger</small>
+                        </div>
+                        <span class="price">2,50 €</span>
+                      </div>
+
+                      <div class="menu-item">
+                        <div class="menu-icon">☕</div>
+                        <div>
+                          <strong>Cappuccino</strong>
+                          <small>Mousse légère et café onctueux</small>
+                        </div>
+                        <span class="price">3,50 €</span>
+                      </div>
+
+                      <div class="menu-item">
+                        <div class="menu-icon">🫖</div>
+                        <div>
+                          <strong>Thé</strong>
+                          <small>Infusion douce ou tonic</small>
+                        </div>
+                        <span class="price">2,50 €</span>
+                      </div>
+
+                      <div class="menu-item">
+                        <div class="menu-icon">🍫</div>
+                        <div>
+                          <strong>Chocolat chaud</strong>
+                          <small>Crémeux, réconfortant et gourmand</small>
+                        </div>
+                        <span class="price">3,50 €</span>
+                      </div>
+                    </div>
+                  </aside>
+
+                  <section class="form-pane" id="integration" aria-label="Zone réservée au formulaire Tally">
+                    <div class="pane-title">
+                      <strong>Zone formulaire</strong>
+                      <span>Tally intégré</span>
+                    </div>
+
+                    <div class="tally-embed-shell">
+                      <iframe
+                        data-tally-src="https://tally.so/embed/obNNrX?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                        loading="lazy"
+                        width="100%"
+                        height="588"
+                        frameborder="0"
+                        marginheight="0"
+                        marginwidth="0"
+                        title="☕ Café du Coin">
+                      </iframe>
+                    </div>
+
+                    <div class="order-confirmation" id="orderConfirmation" aria-live="polite" hidden>
+                      <div class="confirmation-icon">✓</div>
+                      <div class="confirmation-copy">
+                        <small>COMMANDE ENREGISTRÉE</small>
+                        <strong id="confirmationTitle">Merci !</strong>
+                        <div class="confirmation-summary">
+                          <span id="confirmationProduct"></span>
+                          <span id="confirmationQuantity"></span>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </section>
+                </div>
+
+                <div style="padding:0 22px 18px;">
+                  <section style="border:1px solid rgba(30,36,44,.08); border-radius:24px; background:rgba(255,255,255,.60); padding:18px;">
+                    <div class="pane-title">
+                      <strong>Comment fonctionne le test</strong>
+                      
+                    </div>
+                    <div style="display:grid; gap:10px; margin-top:12px;">
+                      <div class="menu-item">
+                        <div class="menu-icon">1</div>
+                        <div>
+                          <strong>Choisir</strong>
+                          <small>Le visiteur sélectionne sa commande dans le formulaire.</small>
+                        </div>
+                      </div>
+                      <div class="menu-item">
+                        <div class="menu-icon">2</div>
+                        <div>
+                          <strong>Valider</strong>
+                          <small>La commande est envoyée par Tally.</small>
+                        </div>
+                      </div>
+                      <div class="menu-item">
+                        <div class="menu-icon">3</div>
+                        <div>
+                          <strong>Enregistrer</strong>
+                          <small>Les données rejoignent ensuite Airtable.</small>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+
+                <div class="screen-footer">
+                  <span class="hint">Démonstration — aucune commande réelle n’est préparée.</span>
+                  <div class="mini-action">
+                    <a class="button small button-ghost" href="le-coin-des-tests.html">← Retour</a>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-inner">
+        <p class="eyebrow"><span></span> Ce que cette page prépare</p>
+        <h2>Une vitrine propre pour accueillir le test réel.</h2>
+
+        <div class="info-grid" style="margin-top:24px;">
+          <article class="info-card">
+            <div class="mini">01 · expérience</div>
+            <h3>Une vraie sensation de tablette</h3>
+            <p>
+              L’objectif est que le visiteur ait l’impression de se retrouver devant l’écran d’un petit café moderne,
+              avec une interface simple et visuelle.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="mini">02 · intégration</div>
+            <h3>Une zone prête pour Tally</h3>
+            <p>
+              Toute la partie droite de l’interface a été pensée pour accueillir directement ton formulaire,
+              sans devoir refaire le design plus tard.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <div class="mini">03 · logique</div>
+            <h3>Une démonstration crédible</h3>
+            <p>
+              Le visiteur ne verra pas seulement un formulaire : il verra un cas d’usage, un contexte et une expérience
+              qui racontent vraiment le test.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-inner">
+        <div class="contact-panel">
+          <div>
+            <p class="eyebrow"><span></span> Suite logique</p>
+            <h2>Prochaine étape : brancher le formulaire dans la tablette.</h2>
+            <div class="bullet-list" style="margin-top:16px;">
+              <div class="bullet">
+                <i></i>
+                <div>Intégrer le Tally directement dans la zone formulaire.</div>
+              </div>
+              <div class="bullet">
+                <i></i>
+                <div>Conserver l’expérience visuelle tout en rendant la commande réellement testable.</div>
+              </div>
+              <div class="bullet">
+                <i></i>
+                <div>Relier le flux à Airtable pour finaliser le démonstrateur.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-links">
+            <a class="button button-primary" href="le-coin-des-tests.html">Retour au coin des tests</a>
+            <a class="button button-ghost" href="index.html">Retour au portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>DAVID GENTY</strong> · Le Café du Coin · Démonstrateur</div>
+    <a href="#top">Retour en haut ↑</a>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.main-nav');
+
+    toggle?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Navigation de la tablette à la souris : cliquer-glisser comme sur un écran tactile.
+    const tabletScreen = document.querySelector('#tabletScreen');
+
+    if (tabletScreen) {
+      let dragging = false;
+      let startY = 0;
+      let startScrollTop = 0;
+      let pointerId = null;
+
+      tabletScreen.addEventListener('pointerdown', (event) => {
+        // Laisser fonctionner normalement les liens et futurs champs du formulaire.
+        if (event.target.closest('a, button, input, textarea, select, label, iframe, .tally-embed-shell, .order-confirmation, .screen-footer')) return;
+
+        dragging = true;
+        pointerId = event.pointerId;
+        startY = event.clientY;
+        startScrollTop = tabletScreen.scrollTop;
+        tabletScreen.classList.add('is-dragging');
+        tabletScreen.setPointerCapture?.(event.pointerId);
+      });
+
+      tabletScreen.addEventListener('pointermove', (event) => {
+        if (!dragging || event.pointerId !== pointerId) return;
+        const delta = event.clientY - startY;
+        tabletScreen.scrollTop = startScrollTop - delta;
+      });
+
+      const stopDragging = (event) => {
+        if (!dragging) return;
+        if (pointerId !== null && event?.pointerId !== undefined && event.pointerId !== pointerId) return;
+        dragging = false;
+        tabletScreen.classList.remove('is-dragging');
+        if (pointerId !== null) {
+          try { tabletScreen.releasePointerCapture?.(pointerId); } catch (e) {}
+        }
+        pointerId = null;
+      };
+
+      tabletScreen.addEventListener('pointerup', stopDragging);
+      tabletScreen.addEventListener('pointercancel', stopDragging);
+      tabletScreen.addEventListener('lostpointercapture', stopDragging);
+    }
+  </script>
+  <script>
+    var d=document,w="https://tally.so/widgets/embed.js",v=function(){
+      if(typeof Tally!=="undefined"){
+        Tally.loadEmbeds();
+      }else{
+        d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){
+          e.src=e.dataset.tallySrc;
+        });
+      }
+    };
+    if(typeof Tally!=="undefined") v();
+  </script>
+
+  <script>
+    // Confirmation compacte après un envoi réussi du formulaire Tally.
+    window.addEventListener('message', function(event) {
+      if (typeof event.data !== 'string' || !event.data.includes('Tally.FormSubmitted')) return;
+
+      let message;
+      try {
+        message = JSON.parse(event.data);
+      } catch (e) {
+        return;
+      }
+
+      const payload = message && message.payload;
+      if (!payload || payload.formId !== 'obNNrX' || !Array.isArray(payload.fields)) return;
+
+      const findField = (...names) => {
+        const wanted = names.map(name => name.toLowerCase());
+        return payload.fields.find(field =>
+          wanted.includes(String(field.title || '').trim().toLowerCase())
+        );
+      };
+
+      const valueOf = (field) => {
+        if (!field || !field.answer) return '';
+        const value = field.answer.value;
+
+        if (Array.isArray(value)) {
+          return value
+            .map(item => typeof item === 'object' && item !== null ? (item.label || item.value || '') : item)
+            .filter(Boolean)
+            .join(', ');
+        }
+
+        if (typeof value === 'object' && value !== null) {
+          return value.label || value.value || '';
+        }
+
+        return value == null ? '' : String(value);
+      };
+
+      const client = valueOf(findField('Client'));
+      const produit = valueOf(findField('Produit'));
+      const quantite = valueOf(findField('Quantité', 'Quantite'));
+
+      const panel = document.getElementById('orderConfirmation');
+      const title = document.getElementById('confirmationTitle');
+      const product = document.getElementById('confirmationProduct');
+      const quantity = document.getElementById('confirmationQuantity');
+
+      if (!panel) return;
+
+      title.textContent = client ? `Merci ${client} !` : 'Merci !';
+      product.textContent = produit || '';
+      quantity.textContent = quantite ? `Quantité : ${quantite}` : '';
+
+      panel.hidden = false;
+      const footerNewOrder = document.getElementById('footerNewOrder');
+      if (footerNewOrder) footerNewOrder.hidden = false;
+
+      // Après validation seulement, Tally n'a plus besoin de recevoir de clics.
+      // Cela libère totalement la carte de confirmation et son bouton Nouvelle commande.
+      const tallyIframe = document.querySelector('.tally-embed-shell iframe');
+      if (tallyIframe) {
+        tallyIframe.style.pointerEvents = 'none';
+      }
+
+      // Amène doucement la confirmation dans la zone visible de la tablette.
+      setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 80);
+    });
+  </script>
+
+
+<script>
+    (() => {
+      const button = document.getElementById('newOrderButton');
+      if (!button) return;
+
+      button.addEventListener('pointerdown', (event) => {
+        event.stopPropagation();
+      }, { capture: true });
+
+      button.addEventListener('pointerup', (event) => {
+        event.stopPropagation();
+      }, { capture: true });
+    })();
+  </script>
+</body>
+</html>

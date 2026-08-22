@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Le coin des tests — démonstrateurs et expérimentations de David Genty." />
+  <meta name="theme-color" content="#090b10" />
+  <title>Le coin des tests — David Genty</title>
+  <style>
+    :root{
+      --bg:#090b10;
+      --bg-2:#0f131b;
+      --panel:#121824;
+      --panel-2:#171f2e;
+      --line:rgba(255,255,255,.08);
+      --line-2:rgba(124,140,255,.24);
+      --text:#eef2ff;
+      --muted:#a8b1c4;
+      --green:#44d7b6;
+      --lime:#d6ff6b;
+      --violet:#7c8cff;
+      --shadow:0 24px 70px rgba(0,0,0,.35);
+      --radius:28px;
+      --radius-sm:18px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(124,140,255,.16), transparent 26%),
+        radial-gradient(circle at 92% 14%, rgba(68,215,182,.12), transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(214,255,107,.08), transparent 24%),
+        linear-gradient(180deg, #090b10 0%, #0a0d14 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+
+    .ambient,
+    .ambient:before,
+    .ambient:after{
+      pointer-events:none;
+      position:fixed;
+      inset:auto;
+      border-radius:999px;
+      filter:blur(50px);
+      opacity:.28;
+      z-index:-2;
+    }
+    .ambient{
+      width:360px;height:360px;
+      top:8%;left:-80px;
+      background:rgba(124,140,255,.22);
+    }
+    .ambient:before{
+      content:"";
+      width:280px;height:280px;
+      top:360px;right:-60px;
+      background:rgba(68,215,182,.18);
+      position:fixed;
+    }
+    .ambient:after{
+      content:"";
+      width:320px;height:320px;
+      bottom:-90px;left:28%;
+      background:rgba(214,255,107,.10);
+      position:fixed;
+    }
+
+    .noise{
+      position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.08;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at center, black 55%, transparent 100%);
+    }
+
+    .site-header{
+      width:min(calc(100% - 32px), var(--max));
+      margin:18px auto 0;
+      padding:14px 18px;
+      border:1px solid var(--line);
+      background:rgba(8,11,17,.64);
+      backdrop-filter: blur(16px);
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      position:sticky;
+      top:14px;
+      z-index:50;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+    }
+
+    .brand{
+      display:flex; align-items:center; gap:14px; text-decoration:none; color:var(--text);
+      min-width:0;
+    }
+    .brand-mark{
+      width:42px;height:42px;border-radius:14px;
+      display:grid;place-items:center;
+      background:linear-gradient(135deg, rgba(124,140,255,.30), rgba(68,215,182,.24));
+      border:1px solid rgba(255,255,255,.08);
+      font-weight:800; letter-spacing:.04em;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .brand-copy{display:flex;flex-direction:column;gap:2px;line-height:1.05}
+    .brand-copy strong{font-size:.95rem; letter-spacing:.08em}
+    .brand-copy small{font-size:.76rem;color:var(--muted)}
+
+    .main-nav{
+      display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .main-nav a{
+      text-decoration:none; color:var(--muted); font-size:.95rem;
+      padding:10px 12px; border-radius:999px; transition:.2s ease;
+      border:1px solid transparent;
+    }
+    .main-nav a:hover,
+    .main-nav a.active{
+      color:var(--text);
+      background:rgba(255,255,255,.04);
+      border-color:var(--line);
+    }
+    .main-nav .nav-cta{
+      color:var(--text);
+      border-color:rgba(68,215,182,.25);
+      background:linear-gradient(180deg, rgba(68,215,182,.10), rgba(68,215,182,.04));
+    }
+
+    .nav-toggle{
+      display:none;
+      width:44px;height:44px;border-radius:14px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      align-items:center;justify-content:center;flex-direction:column;gap:5px;
+    }
+    .nav-toggle span{
+      width:18px;height:2px;background:var(--text);display:block;border-radius:999px;
+    }
+
+    .page-shell{
+      width:min(calc(100% - 32px), var(--max));
+      margin:38px auto 100px;
+    }
+
+    .section-shell{
+      position:relative;
+      border:1px solid var(--line);
+      background:linear-gradient(180deg, rgba(18,24,36,.86), rgba(13,18,27,.88));
+      box-shadow:var(--shadow);
+      border-radius:36px;
+      overflow:hidden;
+      margin-top:30px;
+    }
+    .section-shell:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(90deg, transparent, rgba(255,255,255,.02), transparent),
+        radial-gradient(circle at top right, rgba(124,140,255,.10), transparent 30%);
+      pointer-events:none;
+    }
+    .section-inner{
+      position:relative;
+      z-index:1;
+      padding:34px;
+    }
+
+    .eyebrow{
+      margin:0 0 12px; color:#cfd6e4; font-size:.78rem; text-transform:uppercase; letter-spacing:.18em;
+      display:flex; align-items:center; gap:10px;
+    }
+    .eyebrow span{
+      width:32px;height:2px;border-radius:999px;background:linear-gradient(90deg, var(--green), var(--lime));
+      display:inline-block;
+    }
+    h1,h2,h3{margin:0}
+    h1{
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height:.98;
+      letter-spacing:-.04em;
+    }
+    h1 em{
+      font-style:normal;
+      background:linear-gradient(135deg, #d6ff6b 0%, #44d7b6 45%, #7c8cff 100%);
+      -webkit-background-clip:text;background-clip:text;color:transparent;
+    }
+    h2{
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      line-height:1.05;
+      letter-spacing:-.03em;
+    }
+    h3{
+      font-size: clamp(1.12rem, 1.8vw, 1.35rem);
+      line-height:1.1;
+      letter-spacing:-.02em;
+    }
+    p{margin:0;color:var(--muted);line-height:1.7}
+
+    .hero{
+      display:grid; grid-template-columns: 1.05fr .95fr; gap:28px;
+      align-items:stretch;
+      padding:34px;
+    }
+
+    .hero-copy{
+      display:flex; flex-direction:column; gap:20px; justify-content:center;
+    }
+    .hero-copy .lead{
+      max-width:58ch;
+      font-size:1.04rem;
+    }
+    .hero-actions{
+      display:flex; gap:14px; flex-wrap:wrap; margin-top:6px;
+    }
+    .button{
+      display:inline-flex; align-items:center; gap:10px;
+      text-decoration:none; color:var(--text);
+      padding:14px 18px; border-radius:16px;
+      border:1px solid var(--line);
+      transition:.22s ease;
+      font-weight:600;
+    }
+    .button:hover{transform:translateY(-1px); border-color:rgba(255,255,255,.16)}
+    .button-primary{
+      background:linear-gradient(135deg, rgba(124,140,255,.22), rgba(68,215,182,.18));
+      border-color:rgba(124,140,255,.22);
+    }
+    .button-ghost{background:rgba(255,255,255,.03)}
+
+    .status-row{
+      display:flex; flex-wrap:wrap; gap:10px 14px; margin-top:4px;
+    }
+    .chip{
+      padding:10px 14px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      color:#d3daeb;
+      font-size:.92rem;
+      display:inline-flex; align-items:center; gap:8px;
+    }
+    .chip i{
+      width:8px;height:8px;border-radius:999px;background:var(--green);display:inline-block;
+      box-shadow:0 0 0 6px rgba(68,215,182,.12);
+    }
+
+    .lab-hero{
+      position:relative;
+      min-height:560px;
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:
+        radial-gradient(circle at top left, rgba(124,140,255,.14), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(68,215,182,.12), transparent 24%),
+        linear-gradient(180deg, rgba(15,19,27,.92), rgba(11,15,22,.95));
+      overflow:hidden;
+    }
+    .lab-hero .topline{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:18px 22px; border-bottom:1px solid var(--line);
+      color:var(--muted); font-size:.84rem; letter-spacing:.08em; text-transform:uppercase;
+    }
+    .lab-hero .topline .live{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px; border-radius:999px;
+      background:rgba(255,255,255,.04); border:1px solid var(--line);
+    }
+    .lab-hero .topline .live i{
+      width:8px;height:8px;background:var(--lime);border-radius:999px;display:inline-block;
+      box-shadow:0 0 0 6px rgba(214,255,107,.12);
+    }
+
+    .bench-grid{
+      position:relative;
+      min-height:500px;
+      padding:24px;
+    }
+    .bench-grid:before{
+      content:"";
+      position:absolute; inset:24px;
+      border:1px dashed rgba(255,255,255,.06);
+      border-radius:24px;
+      pointer-events:none;
+    }
+
+    .lab-card{
+      position:absolute;
+      width:190px;
+      min-height:134px;
+      padding:18px;
+      border-radius:22px;
+      background:linear-gradient(180deg, rgba(20,27,39,.96), rgba(16,21,31,.92));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 18px 40px rgba(0,0,0,.26);
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .lab-card .mini{
+      font-size:.76rem; text-transform:uppercase; letter-spacing:.16em; color:#d2d9ea;
+      display:flex; align-items:center; gap:8px;
+    }
+    .lab-card .mini:before{
+      content:""; width:8px; height:8px; border-radius:999px; background:var(--green); display:inline-block;
+      box-shadow:0 0 0 6px rgba(68,215,182,.10);
+    }
+    .lab-card strong{font-size:1.05rem; line-height:1.15}
+    .lab-card p{font-size:.94rem; line-height:1.55}
+    .lab-card small{
+      color:#d1d8e7;
+      display:inline-flex; align-items:center; gap:7px;
+      opacity:.9;
+    }
+
+    .card-main{top:38px; left:32px; width:215px; transform:rotate(-3deg)}
+    .card-notes{top:76px; right:42px; width:220px; transform:rotate(4deg)}
+    .card-stack{top:204px; left:150px; width:220px; transform:rotate(2deg)}
+    .card-wire{top:232px; right:142px; width:210px; transform:rotate(-2deg)}
+    .card-postit{
+      left:42px; bottom:42px; width:178px; min-height:118px;
+      background:linear-gradient(180deg, rgba(214,255,107,.16), rgba(214,255,107,.09));
+      transform:rotate(-2.5deg);
+    }
+    .card-postit .mini:before{background:var(--lime); box-shadow:0 0 0 6px rgba(214,255,107,.10)}
+    .card-postit p{color:#ebf3c9}
+    .card-test{right:32px; bottom:34px; width:245px; transform:rotate(3deg)}
+
+    .bench-line{
+      position:absolute; inset:0; pointer-events:none; overflow:visible;
+    }
+    .bench-line path{
+      fill:none;
+      stroke:rgba(68,215,182,.48);
+      stroke-width:2;
+      stroke-dasharray:8 10;
+      stroke-linecap:round;
+      animation:dash 1.15s linear infinite;
+    }
+    .bench-line .alt{stroke:rgba(124,140,255,.45)}
+    .bench-dot{
+      fill:var(--lime);
+      filter: drop-shadow(0 0 10px rgba(214,255,107,.55));
+    }
+
+    @keyframes dash { to { stroke-dashoffset:-36; } }
+
+    .section-heading{display:flex; flex-direction:column; gap:12px; margin-bottom:24px}
+    .section-heading.compact{margin-bottom:18px}
+
+    .about-grid{
+      display:grid; grid-template-columns: 1.05fr .95fr; gap:24px;
+    }
+    .note-stack{
+      display:grid; gap:16px;
+    }
+    .note{
+      border:1px solid var(--line);
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(18,24,36,.96), rgba(15,20,31,.92));
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+    }
+    .note:before{
+      content:"";
+      position:absolute; width:120px; height:120px; right:-28px; top:-28px;
+      background:radial-gradient(circle, rgba(124,140,255,.18), transparent 70%);
+      border-radius:999px;
+    }
+    .note.highlight:before{background:radial-gradient(circle, rgba(68,215,182,.18), transparent 70%)}
+    .note ul{margin:14px 0 0; padding-left:18px; color:var(--muted)}
+    .note li{margin:8px 0; line-height:1.55}
+
+    .mess-board{
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:linear-gradient(180deg, rgba(12,17,25,.94), rgba(10,14,22,.95));
+      padding:22px;
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+    }
+    .mess-board:before{
+      content:"";
+      position:absolute; inset:18px;
+      border-radius:22px;
+      border:1px dashed rgba(255,255,255,.06);
+      pointer-events:none;
+    }
+    .mess-board .tag{
+      display:inline-flex; padding:8px 12px; border-radius:999px;
+      border:1px solid var(--line); background:rgba(255,255,255,.04);
+      color:#d4dced; font-size:.8rem; text-transform:uppercase; letter-spacing:.12em;
+      margin:0 8px 10px 0;
+    }
+    .mess-board .scribble{
+      position:absolute; border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03); color:#eef2ff; border-radius:18px;
+      padding:16px 18px; max-width:220px; box-shadow:0 16px 34px rgba(0,0,0,.22);
+    }
+    .s1{top:92px; right:28px; transform:rotate(5deg)}
+    .s2{bottom:32px; left:34px; transform:rotate(-4deg)}
+    .s3{bottom:62px; right:52px; transform:rotate(3deg)}
+    .scribble strong{display:block; margin-bottom:8px; font-size:.96rem}
+    .scribble p{font-size:.92rem; line-height:1.5}
+
+    .stations{
+      display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:18px;
+    }
+    .station{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(20,27,39,.96), rgba(13,18,27,.95));
+      padding:24px;
+      display:flex; flex-direction:column; gap:16px;
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+    }
+    .station:before{
+      content:"";
+      position:absolute; inset:auto -20% 72% auto;
+      width:180px; height:180px; border-radius:999px;
+      background:radial-gradient(circle, rgba(124,140,255,.18), transparent 70%);
+      pointer-events:none;
+    }
+    .station .kicker{
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      font-size:.76rem; color:#d3dced; text-transform:uppercase; letter-spacing:.14em;
+    }
+    .station .kicker .index{
+      width:34px;height:34px;border-radius:12px; display:grid; place-items:center;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      font-weight:700; color:var(--text);
+    }
+    .station .meta{
+      display:flex; gap:8px; flex-wrap:wrap;
+    }
+    .pill{
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:#d7deed; font-size:.86rem;
+    }
+    .pill.active{background:rgba(68,215,182,.08); border-color:rgba(68,215,182,.22); color:#effff8}
+    .pill.pending{background:rgba(124,140,255,.08); border-color:rgba(124,140,255,.22)}
+    .station .actions{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top:auto;
+    }
+    .button.small{
+      padding:12px 14px; border-radius:14px; font-size:.94rem;
+    }
+
+    .lab-notebook{
+      display:grid; grid-template-columns: .92fr 1.08fr; gap:20px;
+    }
+    .blueprint{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:
+        linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(18,24,36,.95), rgba(11,16,25,.96));
+      background-size: 28px 28px, 28px 28px, auto;
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+    }
+    .blueprint .flow{
+      display:grid; gap:16px; margin-top:18px;
+    }
+    .flow-row{
+      display:grid; grid-template-columns: 1fr 36px 1fr; gap:12px; align-items:center;
+    }
+    .flow-box{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:18px; background:rgba(255,255,255,.04);
+      padding:16px;
+    }
+    .flow-arrow{
+      width:36px;height:36px;border-radius:999px; display:grid; place-items:center;
+      color:#e9f8f5;
+      background:linear-gradient(135deg, rgba(68,215,182,.24), rgba(124,140,255,.20));
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .checklist{
+      border:1px solid var(--line);
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(18,24,36,.95), rgba(14,18,28,.95));
+      padding:24px;
+    }
+    .check-grid{
+      display:grid; gap:12px; margin-top:18px;
+    }
+    .check{
+      display:flex; gap:14px; align-items:flex-start;
+      border:1px solid rgba(255,255,255,.06);
+      background:rgba(255,255,255,.03);
+      padding:14px 16px; border-radius:18px;
+    }
+    .check i{
+      width:22px;height:22px;border-radius:999px;border:1px solid rgba(68,215,182,.30);
+      background:rgba(68,215,182,.08); flex:0 0 22px; margin-top:2px; position:relative;
+    }
+    .check i:after{
+      content:""; position:absolute; inset:5px; border-radius:999px; background:var(--green);
+      box-shadow:0 0 0 6px rgba(68,215,182,.10);
+    }
+    .check strong{display:block; margin-bottom:4px; font-size:.98rem}
+    .check p{font-size:.93rem}
+
+    .contact-panel{
+      display:grid; grid-template-columns: 1fr auto; gap:20px; align-items:center;
+    }
+    .contact-links{
+      display:flex; gap:12px; flex-wrap:wrap; justify-content:flex-end;
+    }
+
+    footer{
+      width:min(calc(100% - 32px), var(--max));
+      margin:0 auto 40px;
+      color:var(--muted);
+      display:flex; justify-content:space-between; gap:20px; align-items:center;
+      font-size:.92rem;
+    }
+    footer a{color:var(--text); text-decoration:none}
+
+    @media (max-width: 1080px){
+      .hero,
+      .about-grid,
+      .lab-notebook{
+        grid-template-columns:1fr;
+      }
+      .stations{
+        grid-template-columns:repeat(2, minmax(0,1fr));
+      }
+    }
+
+    @media (max-width: 820px){
+      .site-header{
+        border-radius:26px;
+        padding:14px;
+        align-items:flex-start;
+      }
+      .nav-toggle{display:flex}
+      .main-nav{
+        display:none;
+        width:100%;
+        padding-top:12px;
+        flex-direction:column; align-items:stretch;
+      }
+      .main-nav.open{display:flex}
+      .main-nav a{width:100%; text-align:center}
+
+      .hero{padding:22px}
+      .section-inner{padding:24px}
+      .lab-hero{min-height:760px}
+      .card-main{top:28px; left:20px}
+      .card-notes{top:54px; right:18px}
+      .card-stack{top:226px; left:36px}
+      .card-wire{top:288px; right:28px}
+      .card-postit{left:24px; bottom:162px}
+      .card-test{right:22px; bottom:36px}
+      .stations{grid-template-columns:1fr}
+      .contact-panel{grid-template-columns:1fr}
+      .contact-links{justify-content:flex-start}
+      footer{flex-direction:column; align-items:flex-start}
+    }
+
+    @media (max-width: 620px){
+      .page-shell{width:min(calc(100% - 20px), var(--max)); margin-top:22px}
+      .site-header{width:min(calc(100% - 20px), var(--max)); top:10px}
+      .brand-copy strong{font-size:.86rem}
+      .hero{padding:18px}
+      .hero-copy{gap:16px}
+      .section-inner{padding:20px}
+      .lab-hero{min-height:1000px}
+      .bench-grid{padding:18px}
+      .lab-card{
+        position:relative !important;
+        left:auto !important; right:auto !important; top:auto !important; bottom:auto !important;
+        width:100% !important;
+        transform:none !important;
+        margin-bottom:14px;
+      }
+      .bench-line{display:none}
+      .mess-board{padding-bottom:270px}
+      .scribble{max-width:calc(100% - 36px)}
+      .s1{top:110px; right:18px}
+      .s2{bottom:112px; left:18px}
+      .s3{bottom:24px; right:18px}
+      .flow-row{grid-template-columns:1fr; gap:10px}
+      .flow-arrow{justify-self:center; transform:rotate(90deg)}
+      .hero-actions, .contact-links{width:100%}
+      .button{width:100%; justify-content:center}
+      .status-row{gap:10px}
+      .chip{width:100%; justify-content:center}
+    }
+
+    
+    /* Ajustements ciblés pour la version simplifiée du Coin des tests */
+    .hero-copy .lead { max-width: 65ch; }
+
+    .card-main{top:34px; left:28px; width:215px; transform:rotate(-3deg)}
+    .card-notes{top:54px; right:30px; width:215px; transform:rotate(3deg)}
+    .card-stack{top:222px; left:86px; width:220px; transform:rotate(1.5deg)}
+    .card-wire{top:234px; right:92px; width:220px; transform:rotate(-1.8deg)}
+    .card-postit{left:36px; bottom:34px; width:184px; min-height:118px; transform:rotate(-2deg)}
+    .card-test{right:26px; bottom:26px; width:236px; transform:rotate(2.5deg)}
+
+    @media (max-width: 1080px){
+      .stations{grid-template-columns:repeat(3, minmax(0,1fr)) !important;}
+    }
+
+    @media (max-width: 900px){
+      .stations{grid-template-columns:1fr !important;}
+      .lab-hero{min-height:840px}
+      .card-main{top:26px; left:18px}
+      .card-notes{top:52px; right:18px}
+      .card-stack{top:240px; left:28px}
+      .card-wire{top:294px; right:20px}
+      .card-postit{left:20px; bottom:152px}
+      .card-test{right:18px; bottom:24px}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto}
+      .bench-line path{animation:none}
+      .bench-dot{display:none}
+    }
+  
+    /* Répartition finale de l'atelier : cartes plus petites, dispersées et sans chevauchement. */
+    .lab-hero {
+      min-height: 610px;
+    }
+
+    .bench-grid {
+      min-height: 550px;
+    }
+
+    .lab-card {
+      width: 172px;
+      min-height: 118px;
+      padding: 15px 16px;
+      gap: 8px;
+    }
+
+    .lab-card strong {
+      font-size: .98rem;
+    }
+
+    .lab-card p {
+      font-size: .86rem;
+      line-height: 1.45;
+    }
+
+    .lab-card small {
+      font-size: .76rem;
+      line-height: 1.35;
+    }
+
+    .card-main {
+      top: 34px;
+      left: 34px;
+      width: 180px;
+      transform: rotate(-3deg);
+    }
+
+    .card-notes {
+      top: 38px;
+      right: 38px;
+      width: 184px;
+      transform: rotate(3deg);
+    }
+
+    .card-stack {
+      top: 205px;
+      left: 245px;
+      width: 186px;
+      transform: rotate(2deg);
+    }
+
+    .card-wire {
+      top: 215px;
+      right: 38px;
+      width: 185px;
+      transform: rotate(-2deg);
+    }
+
+    .card-postit {
+      left: 52px;
+      bottom: 38px;
+      width: 174px;
+      min-height: 108px;
+      transform: rotate(-2.5deg);
+    }
+
+    .card-test {
+      right: 230px;
+      bottom: 34px;
+      width: 190px;
+      transform: rotate(2.5deg);
+    }
+
+    @media (max-width: 1000px) and (min-width: 621px) {
+      .lab-hero {
+        min-height: 790px;
+      }
+
+      .bench-grid {
+        min-height: 730px;
+      }
+
+      .card-main {
+        top: 28px;
+        left: 28px;
+      }
+
+      .card-notes {
+        top: 34px;
+        right: 28px;
+      }
+
+      .card-stack {
+        top: 230px;
+        left: 34px;
+      }
+
+      .card-wire {
+        top: 236px;
+        right: 34px;
+      }
+
+      .card-postit {
+        left: 70px;
+        bottom: 34px;
+      }
+
+      .card-test {
+        right: 70px;
+        bottom: 30px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .lab-hero {
+        min-height: auto;
+      }
+
+      .bench-grid {
+        min-height: 0;
+      }
+
+      .lab-card {
+        width: 100% !important;
+        min-height: 0;
+        padding: 16px;
+      }
+    }
+
+  
+    /* Correction ciblée : séparer Notes et Workflow, et contenir les pointillés. */
+    .card-notes {
+      top: 34px;
+      right: 34px;
+      width: 180px;
+      transform: rotate(3deg);
+    }
+
+    .card-wire {
+      top: 255px;
+      right: 34px;
+      width: 182px;
+      transform: rotate(-2deg);
+    }
+
+    .bench-line {
+      inset: 24px;
+      width: calc(100% - 48px);
+      height: calc(100% - 48px);
+      overflow: hidden;
+    }
+
+    .bench-line path,
+    .bench-line circle {
+      vector-effect: non-scaling-stroke;
+    }
+
+    @media (max-width: 1000px) and (min-width: 621px) {
+      .card-notes {
+        top: 32px;
+        right: 26px;
+      }
+
+      .card-wire {
+        top: 278px;
+        right: 26px;
+      }
+
+      .bench-line {
+        inset: 20px;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+      }
+    }
+
+  
+    /* Ajustements finaux ciblés des post-it de l'atelier. */
+    .card-test {
+      top: 228px;
+      right: 238px;
+      bottom: auto;
+      width: 184px;
+      transform: rotate(2.5deg);
+    }
+
+    .card-wire {
+      top: 282px;
+      right: 30px;
+      width: 168px;
+      min-height: 104px;
+      padding: 13px 14px;
+      transform: rotate(-2deg);
+    }
+
+    .card-wire strong {
+      font-size: .92rem;
+    }
+
+    .card-wire p {
+      font-size: .81rem;
+      line-height: 1.38;
+    }
+
+    @media (max-width: 1000px) and (min-width: 621px) {
+      .card-test {
+        top: 520px;
+        right: 48px;
+        bottom: auto;
+      }
+
+      .card-wire {
+        top: 306px;
+        right: 22px;
+        width: 166px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .card-test,
+      .card-wire {
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        width: 100% !important;
+      }
+    }
+
+  
+    /* Effet volontaire : deux post-it retournés pour accentuer l'aspect test / atelier. */
+    .card-postit {
+      transform: rotate(178deg);
+    }
+
+    .card-wire {
+      transform: rotate(182deg);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html" aria-label="Retour au portfolio de David Genty">
+      <span class="brand-mark">DG</span>
+      <span class="brand-copy">
+        <strong>DAVID GENTY</strong>
+        <small>Portfolio 2026</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html">Portfolio</a>
+      <a href="cv.html">CV digital</a>
+      <a href="cv-pdf.html">CV PDF</a>
+      <a href="#stations" class="active">Le coin des tests</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    
+    <section class="section-shell">
+      <div class="section-inner">
+        <div class="hero-copy" style="max-width: 860px;">
+          <p class="eyebrow"><span></span> Espace d’expérimentation · No-Code · Automatisation · IA</p>
+          <h1>Le coin des <em>tests</em>.</h1>
+          <p class="lead">
+            Un espace un peu plus libre, un peu plus vivant, où je rassemble des idées, des démonstrateurs et des essais
+            autour du <strong>No-Code</strong>, de l’<strong>automatisation</strong> et de l’<strong>IA appliquée</strong>.
+            Ici, je ne montre pas des projets parfaits. Je montre des solutions en train de se construire.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    
+    <section class="section-shell">
+      <div class="section-inner">
+        <div class="section-heading compact">
+          <p class="eyebrow"><span></span> Statut des tests</p>
+          <h2>Une vue simple, pour avancer étape par étape.</h2>
+        </div>
+
+        <div class="stations" style="grid-template-columns: repeat(3, minmax(0,1fr));">
+          <article class="station">
+            <div class="kicker">
+              <span class="index">01</span>
+              <span>Tests en cours</span>
+            </div>
+            <h3>Le Café du Coin</h3>
+            <p>
+              Premier démonstrateur en préparation : une interface de commande pensée comme une tablette de café,
+              reliée à une logique simple de collecte et de traitement.
+            </p>
+            <div class="meta">
+              <span class="pill active">En cours</span>
+              <span class="pill">Tally</span>
+              <span class="pill">Airtable</span>
+            </div>
+            <div class="actions">
+              <a class="button small button-primary" href="cafe-du-coin.html">Entrer dans le test <span>↗</span></a>
+            </div>
+          </article>
+
+          <article class="station">
+            <div class="kicker">
+              <span class="index">02</span>
+              <span>Tests terminés</span>
+            </div>
+            <h3>Aucun test terminé pour le moment</h3>
+            <p>
+              Cette zone accueillera les démonstrateurs finalisés, une fois qu’ils seront assez aboutis pour être montrés comme tests terminés.
+            </p>
+            <div class="meta">
+              <span class="pill pending">À venir</span>
+            </div>
+          </article>
+
+          <article class="station">
+            <div class="kicker">
+              <span class="index">03</span>
+              <span>Tests bloqués</span>
+            </div>
+            <h3>Aucun test bloqué pour le moment</h3>
+            <p>
+              Si un essai rencontre une limite technique, un manque de temps ou une piste à revoir, il trouvera sa place ici.
+            </p>
+            <div class="meta">
+              <span class="pill pending">Rien à signaler</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-inner">
+        <div class="lab-hero" aria-label="Mise en scène du coin des tests">
+          <div class="topline">
+            <span>atelier / david-genty / build-lab</span>
+            <span class="live"><i></i> actif</span>
+          </div>
+
+          <div class="bench-grid">
+            <svg class="bench-line" viewBox="0 0 700 500" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M145 126 C215 126 210 176 260 214" />
+              <path class="alt" d="M420 120 C470 144 470 198 504 245" />
+              <path d="M248 312 C310 316 365 306 430 286" />
+              <path class="alt" d="M188 392 C245 378 286 356 334 334" />
+              <circle class="bench-dot" cx="145" cy="126" r="4.5" />
+              <circle class="bench-dot" cx="260" cy="214" r="4.5" />
+              <circle class="bench-dot" cx="420" cy="120" r="4.5" />
+              <circle class="bench-dot" cx="504" cy="245" r="4.5" />
+            </svg>
+
+            <article class="lab-card card-main">
+              <span class="mini">idée</span>
+              <strong>Le coin des tests</strong>
+              <p>Un espace pour expérimenter sans prétendre repartir de zéro.</p>
+              
+            </article>
+
+            <article class="lab-card card-notes">
+              <span class="mini">notes</span>
+              <strong>Ce qui m’intéresse</strong>
+              <p>Transformer un besoin concret en solution claire, utile et testable.</p>
+              
+            </article>
+
+            <article class="lab-card card-stack">
+              <span class="mini">station</span>
+              <strong>Le Café du Coin</strong>
+              <p>Première piste : une commande sur tablette reliée à un workflow simple.</p>
+              
+            </article>
+
+            <article class="lab-card card-wire">
+              <span class="mini">workflow</span>
+              <strong>Observer avant d’automatiser</strong>
+              <p>Comprendre le parcours utilisateur avant de connecter les outils.</p>
+              
+            </article>
+
+            <article class="lab-card card-postit">
+              <span class="mini">à tester</span>
+              <strong>Version 1</strong>
+              <p>Un démonstrateur simple, lisible et vraiment essayable par le visiteur.</p>
+            </article>
+
+            <article class="lab-card card-test">
+              <span class="mini">ambiance</span>
+              <strong>Un atelier plus vivant</strong>
+              <p>Un fouillis maîtrisé : un espace de construction plutôt qu’une vitrine figée.</p>
+              
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell" id="contact">
+
+      <div class="section-inner">
+        <div class="contact-panel">
+          <div>
+            <p class="eyebrow"><span></span> Suite logique</p>
+            <h2>Ici, on teste, on se trompe, on s’interroge,<br />et parfois même, on réussit.</h2>
+          </div>
+
+          <div class="contact-links">
+            <a class="button button-primary" href="index.html">Retour au portfolio</a>
+            <a class="button button-ghost" href="cv.html">CV digital</a>
+            <a class="button button-ghost" href="cv-pdf.html">CV PDF</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>DAVID GENTY</strong> · Le coin des tests</div>
+    <a href="#top">Retour en haut ↑</a>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const nav = document.querySelector('.main-nav');
+
+    toggle?.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  </script>
+</body>
+</html>
