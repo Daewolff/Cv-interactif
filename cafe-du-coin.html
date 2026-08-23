@@ -1556,6 +1556,139 @@
       }
     }
 
+  
+    /* ===== Repères Client / Serveur ===== */
+    .view-label{
+      margin: 0 0 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #d0d7e6;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    .view-label span{
+      width: 30px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--green), var(--lime));
+      display: inline-block;
+    }
+
+    .tablet-column .view-label{
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    /* ===== Vue serveur Airtable ===== */
+    .server-view-section{
+      margin-top: 28px;
+    }
+
+    .server-heading{
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .server-heading h2{
+      margin-bottom: 10px;
+    }
+
+    .server-window{
+      overflow: hidden;
+      border-radius: 28px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(20,27,39,.96), rgba(13,18,27,.96));
+      box-shadow: var(--shadow);
+    }
+
+    .server-window-bar{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .86rem;
+      background: rgba(255,255,255,.025);
+    }
+
+    .server-window-bar > div{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .server-window-bar strong{
+      color: var(--text);
+      font-size: .92rem;
+    }
+
+    .server-dot{
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(68,215,182,.10);
+      flex: 0 0 auto;
+    }
+
+    .airtable-frame-wrap{
+      padding: 16px;
+      background:
+        radial-gradient(circle at top right, rgba(124,140,255,.07), transparent 28%),
+        rgba(9,12,18,.72);
+    }
+
+    .airtable-embed{
+      display: block;
+      width: 100%;
+      height: 620px;
+      border: 0 !important;
+      border-radius: 18px;
+      background: #fff;
+    }
+
+    @media (max-width: 860px){
+      .tablet-column .view-label{
+        justify-content: flex-start;
+      }
+
+      .server-window-bar{
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .airtable-frame-wrap{
+        padding: 10px;
+      }
+
+      .airtable-embed{
+        height: 660px;
+      }
+    }
+
+  
+    /* Finition vue serveur : centrer l'introduction par rapport au tableau Airtable */
+    .server-heading{
+      max-width: 760px;
+      margin: 0 auto 24px !important;
+      text-align: center;
+    }
+
+    .server-heading .view-label{
+      justify-content: center;
+    }
+
+    .server-heading p{
+      margin-left: auto;
+      margin-right: auto;
+    }
+
   </style>
   <script async src="https://tally.so/widgets/embed.js"></script>
 </head>
@@ -1608,6 +1741,7 @@
           </div>
 
           <div class="tablet-column">
+            <p class="view-label"><span></span> 01 — Vu par le client</p>
             <h1 class="tablet-title">Le <em>Café du Coin</em>.</h1>
             <div class="device-stage" id="tablette">
             <div class="tablet" aria-label="Maquette de tablette pour Le Café du Coin">
@@ -1773,6 +1907,43 @@
       </div>
     </section>
 </main>
+
+
+    <section class="section-shell server-view-section" id="serveur">
+      <div class="section-inner">
+        <div class="server-heading">
+          <p class="view-label"><span></span> 02 — Vu par le serveur</p>
+          <h2>Suivi des commandes.</h2>
+          <p>
+            Cette vue reprend directement les commandes enregistrées dans Airtable
+            et permet de suivre leur évolution côté service.
+          </p>
+        </div>
+
+        <div class="server-window">
+          <div class="server-window-bar">
+            <div>
+              <span class="server-dot"></span>
+              <strong>Commandes · Café du Coin</strong>
+            </div>
+            <span>Airtable · vue partagée</span>
+          </div>
+
+          <div class="airtable-frame-wrap">
+            <iframe
+              class="airtable-embed"
+              src="https://airtable.com/embed/app0WR2fCskPzr33p/shrHcyNCcDi932jW6?viewControls=on"
+              frameborder="0"
+              onmousewheel=""
+              width="100%"
+              height="533"
+              loading="lazy"
+              title="Vue serveur Airtable — Café du Coin">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
 
   <footer>
     <div><strong>DAVID GENTY</strong> · Le Café du Coin · Démonstrateur</div>
