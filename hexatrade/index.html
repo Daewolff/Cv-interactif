@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hexatrade — simulation d’un réseau d’entreprise réalisée avec Cisco Packet Tracer : VLAN, trunk 802.1Q, routage inter-VLAN, DHCP et DNS.">
+  <meta name="theme-color" content="#090b10">
+  <title>Hexatrade — Projet réseau Packet Tracer</title>
+  <link rel="stylesheet" href="hexatrade.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Retour au portfolio de David Genty">
+      <span class="brand-mark">DG</span>
+      <span class="brand-copy">
+        <strong>DAVID GENTY</strong>
+        <small>Portfolio 2026</small>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navigation du projet">
+      <a href="../le-coin-des-tests.html">← Le coin des tests</a>
+      <a class="nav-cta" href="../index.html">Portfolio ↗</a>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero section-shell">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Projet réseau · Cisco Packet Tracer</p>
+        <h1>Hexatrade</h1>
+        <p class="lead">
+          Simulation d’une petite infrastructure d’entreprise composée de deux services,
+          segmentés en VLAN, avec routage inter-VLAN et services DHCP / DNS centralisés.
+        </p>
+
+        <div class="hero-tags" aria-label="Technologies et notions">
+          <span>Cisco Packet Tracer</span>
+          <span>VLAN</span>
+          <span>802.1Q</span>
+          <span>DHCP</span>
+          <span>DNS</span>
+        </div>
+      </div>
+
+      <div class="network-stage">
+        <div class="network-glow" aria-hidden="true"></div>
+        <img
+          src="assets/hexatrade-topologie.png"
+          alt="Topologie du réseau Hexatrade avec deux VLAN, un switch, un routeur, un serveur et six postes"
+        >
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> Vue d’ensemble</p>
+        <h2>Un réseau simple à lire, assez complet pour pratiquer.</h2>
+        <p>
+          Le scénario représente deux services d’une même entreprise : Compta et Vente.
+          Chacun possède son propre réseau IP et son propre VLAN. Un serveur unique fournit
+          le DHCP et le DNS, tandis qu’un routeur assure la communication entre les VLAN.
+        </p>
+      </div>
+
+      <div class="metrics-grid">
+        <article class="metric-card">
+          <span class="metric-number">02</span>
+          <strong>VLAN</strong>
+          <p>Compta en VLAN 10 et Vente en VLAN 20.</p>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-number">02</span>
+          <strong>Réseaux IPv4</strong>
+          <p>192.168.10.0/24 et 192.168.20.0/24.</p>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-number">01</span>
+          <strong>Serveur central</strong>
+          <p>DHCP et DNS sur 192.168.10.10.</p>
+        </article>
+
+        <article class="metric-card">
+          <span class="metric-number">802.1Q</span>
+          <strong>Routage inter-VLAN</strong>
+          <p>Router-on-a-Stick via un lien trunk.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell split-section">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> Segmentation</p>
+        <h2>Access pour les postes, trunk vers le routeur.</h2>
+        <p>
+          Les ports reliés aux terminaux sont affectés au VLAN de leur service en mode
+          <strong>access</strong>. Le lien entre le switch et le routeur est configuré en
+          <strong>trunk</strong> afin de transporter le trafic des deux VLAN.
+        </p>
+      </div>
+
+      <div class="code-stack">
+        <article class="code-card">
+          <div class="code-topline"><span>Switch · VLAN 10</span><b>ACCESS</b></div>
+          <pre><code>interface range fastethernet0/3 - 5
+ switchport mode access
+ switchport access vlan 10</code></pre>
+        </article>
+
+        <article class="code-card">
+          <div class="code-topline"><span>Switch · vers le routeur</span><b>TRUNK</b></div>
+          <pre><code>interface fastethernet0/1
+ switchport mode trunk</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> Router-on-a-Stick</p>
+        <h2>Une interface physique, une sous-interface par VLAN.</h2>
+        <p>
+          L’interface G0/0 du routeur transporte les deux VLAN. Chaque sous-interface
+          utilise l’encapsulation 802.1Q et sert de passerelle au réseau correspondant.
+        </p>
+      </div>
+
+      <div class="router-grid">
+        <article class="router-card">
+          <span class="router-label">VLAN 10 · COMPTA</span>
+          <pre><code>interface gigabitethernet0/0.10
+ encapsulation dot1Q 10
+ ip address 192.168.10.1 255.255.255.0</code></pre>
+        </article>
+
+        <article class="router-card">
+          <span class="router-label">VLAN 20 · VENTE</span>
+          <pre><code>interface gigabitethernet0/0.20
+ encapsulation dot1Q 20
+ ip address 192.168.20.1 255.255.255.0</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell service-section">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> Services réseau</p>
+        <h2>Un DHCP et un DNS centralisés pour les deux services.</h2>
+        <p>
+          Le serveur utilise l’adresse statique 192.168.10.10. Deux pools DHCP distribuent
+          les paramètres adaptés à chaque VLAN. Le routeur relaie les requêtes DHCP grâce
+          à <code>ip helper-address</code>.
+        </p>
+      </div>
+
+      <div class="service-grid">
+        <article class="service-card">
+          <span class="service-icon">DHCP</span>
+          <h3>Attribution automatique</h3>
+          <p>
+            Chaque poste reçoit une adresse dans son réseau, son masque, sa passerelle
+            et l’adresse du serveur DNS.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon">DNS</span>
+          <h3>Résolution interne</h3>
+          <p>
+            Le serveur assure également la résolution DNS pour les postes des deux VLAN.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <span class="service-icon">↪</span>
+          <h3>DHCP Relay</h3>
+          <p>
+            <code>ip helper-address 192.168.10.10</code> permet au VLAN 20 de joindre
+            le serveur DHCP situé dans le VLAN 10.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell diagnostic-section">
+      <div class="diagnostic-panel">
+        <div>
+          <p class="eyebrow"><span></span> Diagnostic</p>
+          <h2>Le réseau ne distribuait pas les bonnes adresses.</h2>
+          <p>
+            Packet Tracer conservait un pool DHCP par défaut nommé <strong>serverPool</strong>.
+            Il entrait en conflit avec la configuration prévue et pouvait attribuer des
+            adresses incorrectes.
+          </p>
+          <p>
+            Le pool a été identifié puis déplacé vers un réseau inutilisé, ce qui a permis
+            aux pools COMPTA et VENTE de fonctionner correctement.
+          </p>
+        </div>
+
+        <div class="diagnostic-flow" aria-label="Démarche de diagnostic">
+          <div><span>01</span><strong>Observer</strong><small>Attribution DHCP incorrecte</small></div>
+          <b>→</b>
+          <div><span>02</span><strong>Identifier</strong><small>Conflit avec serverPool</small></div>
+          <b>→</b>
+          <div><span>03</span><strong>Corriger</strong><small>Pool isolé du réseau actif</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> Validation</p>
+        <h2>Tester avant de considérer le réseau fonctionnel.</h2>
+      </div>
+
+      <div class="tests-grid">
+        <div><span>✓</span> Distribution DHCP dans chaque VLAN</div>
+        <div><span>✓</span> Communication intra-VLAN</div>
+        <div><span>✓</span> Routage inter-VLAN</div>
+        <div><span>✓</span> Accès au serveur</div>
+        <div><span>✓</span> Résolution DNS</div>
+      </div>
+    </section>
+
+    <section class="section-shell skills-section">
+      <div class="section-heading">
+        <p class="eyebrow"><span></span> Compétences mises en pratique</p>
+        <h2>Ce que ce projet me permet de montrer.</h2>
+      </div>
+
+      <div class="skills">
+        <span>Cisco Packet Tracer</span>
+        <span>Adressage IPv4</span>
+        <span>VLAN</span>
+        <span>Ports Access</span>
+        <span>Trunk 802.1Q</span>
+        <span>Router-on-a-Stick</span>
+        <span>Routage inter-VLAN</span>
+        <span>DHCP</span>
+        <span>DNS</span>
+        <span>DHCP Relay</span>
+        <span>Diagnostic réseau</span>
+      </div>
+
+      <div class="back-actions">
+        <a class="button button-primary" href="../le-coin-des-tests.html">← Retour au coin des tests</a>
+        <a class="button button-ghost" href="../index.html">Retour au portfolio</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Hexatrade · Cisco Packet Tracer</span>
+    <span>Projet d’apprentissage réseau · 2026</span>
+  </footer>
+</body>
+</html>
