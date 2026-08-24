@@ -13,14 +13,81 @@
     >
 
     <link rel="stylesheet" href="netmentor.css">
+
+    <style>
+        .project-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .project-nav-links,
+        .project-back-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .project-nav a,
+        .project-back-actions a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            text-decoration: none;
+            color: inherit;
+            background: rgba(255, 255, 255, 0.035);
+            transition: transform .2s ease, border-color .2s ease, background .2s ease;
+        }
+
+        .project-nav a:hover,
+        .project-back-actions a:hover {
+            transform: translateY(-1px);
+            border-color: rgba(255, 255, 255, 0.22);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .project-nav .back-tests,
+        .project-back-actions .back-tests {
+            background: linear-gradient(
+                135deg,
+                rgba(124, 140, 255, 0.18),
+                rgba(68, 215, 182, 0.14)
+            );
+        }
+
+        .project-back-actions {
+            justify-content: center;
+            margin: 42px 0 10px;
+        }
+
+        @media (max-width: 640px) {
+            .project-nav {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
 
-    <header>
-        <a href="../index.html">
-            ← Retour au portfolio
-        </a>
+    <header class="project-nav">
+        <div class="project-nav-links">
+            <a class="back-tests" href="../le-coin-des-tests.html">
+                ← Le coin des tests
+            </a>
+
+            <a href="../index.html">
+                Retour au portfolio ↗
+            </a>
+        </div>
     </header>
 
     <main>
@@ -616,6 +683,17 @@
             </button>
 
         </section>
+
+
+        <div class="project-back-actions" aria-label="Navigation de fin de projet">
+            <a class="back-tests" href="../le-coin-des-tests.html">
+                ← Retour au coin des tests
+            </a>
+
+            <a href="../index.html">
+                Retour au portfolio
+            </a>
+        </div>
 
     </main>
 
