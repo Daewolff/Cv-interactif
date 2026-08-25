@@ -8,36 +8,30 @@
   <title>David Genty — No-Code · Automatisation · IA appliquée</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Correctif local du workflow uniquement.
-       Les trois niveaux verticaux sont désormais définis dans la
-       disposition principale, et non seulement dans les media queries. */
-    .workflow-card {
-      height: 800px;
-    }
+    /* Correctif local du workflow uniquement :
+       trois zones verticales distinctes pour 02, 04 et la légende. */
+    @media (max-width: 900px) {
+      .workflow-card {
+        height: 900px;
+      }
 
-    .node-nocode {
-      top: 285px;
-    }
+      .node-nocode {
+        top: 270px;
+      }
 
-    .node-impact {
-      top: 500px;
-      bottom: auto;
-    }
+      .node-impact {
+        top: 525px;
+        bottom: auto;
+      }
 
-    .flow-caption {
-      bottom: 24px;
-    }
-
-    /* Aligne légèrement le panneau workflow avec le début du contenu de gauche. */
-    @media (min-width: 901px) {
-      .hero-visual {
-        margin-top: -28px;
+      .flow-caption {
+        bottom: 28px;
       }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 620px) {
       .workflow-card {
-        height: 820px;
+        height: 940px;
       }
 
       .node-nocode {
@@ -45,31 +39,12 @@
       }
 
       .node-impact {
-        top: 515px;
+        top: 570px;
         bottom: auto;
       }
 
       .flow-caption {
         bottom: 24px;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .workflow-card {
-        height: 850px;
-      }
-
-      .node-nocode {
-        top: 300px;
-      }
-
-      .node-impact {
-        top: 535px;
-        bottom: auto;
-      }
-
-      .flow-caption {
-        bottom: 22px;
       }
     }
   </style>
@@ -98,7 +73,6 @@
       <a href="#approche">Approche</a>
       <a href="#outils">Outils</a>
       <a href="#parcours">Parcours</a>
-      <a href="le-coin-des-tests.html">Le coin des tests</a>
       <a href="cv.html">CV digital</a>
       <a href="cv-pdf.html">CV PDF</a>
       <a class="nav-cta" href="#contact">Contact</a>
@@ -136,7 +110,7 @@
             <span class="live-pill"><i></i> actif</span>
           </div>
 
-          <svg class="workflow-lines" viewBox="0 0 640 752" preserveAspectRatio="none" role="img" aria-label="Connexion entre besoin, no-code, automatisation, IA et impact humain">
+          <svg class="workflow-lines" viewBox="0 0 640 500" role="img" aria-label="Connexion entre besoin, no-code, automatisation, IA et impact humain">
             <defs>
               <linearGradient id="pathGradient" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stop-color="#7c8cff" />
@@ -148,24 +122,14 @@
                 <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
               </filter>
             </defs>
-
-            <!-- 01 Besoin métier → 02 No-Code -->
-            <path class="flow-path path-a" d="M178 150 C220 165 216 255 250 286" />
-
-            <!-- 02 No-Code → 03 IA appliquée -->
-            <path class="flow-path path-b" d="M395 286 C430 255 425 170 463 150" />
-
-            <!-- 02 No-Code → 04 Impact humain -->
-            <path class="flow-path path-c" d="M322 414 C322 428 322 442 322 452" />
-
-            <!-- 03 IA appliquée → 04 Impact humain -->
-            <path class="flow-path path-d" d="M535 182 C565 275 540 430 395 505" />
-
-            <!-- Points lumineux placés sur les véritables points de connexion -->
-            <circle class="pulse-dot dot-a" cx="178" cy="150" r="5" />
-            <circle class="pulse-dot dot-b" cx="250" cy="286" r="5" />
-            <circle class="pulse-dot dot-c" cx="463" cy="150" r="5" />
-            <circle class="pulse-dot dot-d" cx="395" cy="505" r="5" />
+            <path class="flow-path path-a" d="M125 110 C240 110 210 235 320 235" />
+            <path class="flow-path path-b" d="M320 235 C430 235 400 110 515 110" />
+            <path class="flow-path path-c" d="M320 235 C320 320 320 330 320 390" />
+            <path class="flow-path path-d" d="M515 110 C570 190 520 310 405 390" />
+            <circle class="pulse-dot dot-a" cx="125" cy="110" r="5" />
+            <circle class="pulse-dot dot-b" cx="320" cy="235" r="5" />
+            <circle class="pulse-dot dot-c" cx="515" cy="110" r="5" />
+            <circle class="pulse-dot dot-d" cx="320" cy="390" r="5" />
           </svg>
 
           <div class="node node-need">
@@ -228,6 +192,11 @@
           Aujourd’hui, je transpose ces réflexes dans un nouveau terrain : les outils numériques, le No-Code, l’automatisation et l’IA.
           Je ne cherche pas à automatiser pour automatiser. Je cherche à comprendre <strong>où la technologie peut retirer de la friction</strong>
           et rendre le travail plus simple, plus fluide et plus utile.
+        </p>
+        <p>
+          Cette évolution s’appuie également sur des <strong>bases réseau acquises à travers le parcours Cisco Network Technician</strong>,
+          complétées par des mises en pratique sous Cisco Packet Tracer. Comprendre les flux, les équipements et les services qui relient
+          un système m’aide aujourd’hui à mieux raisonner sur les automatisations et leurs dépendances.
         </p>
         <div class="quote-card">
           <span class="quote-mark">“</span>
@@ -359,6 +328,7 @@
           mais lui accorde du temps, de la clarté et de nouvelles possibilités. »
         </blockquote>
         <p class="vision-note">
+          <strong>Comprendre les flux avant de les automatiser.</strong><br />
           C’est cette approche que je veux apprendre à transformer en solutions concrètes : simples à comprendre, simples à utiliser et conçues autour des personnes.
         </p>
       </div>
