@@ -12,16 +12,16 @@ const engineContent = {
     text: 'Comprendre l’utilisateur, transmettre les bonnes informations et conserver une logique de solution concrète.'
   },
   core: {
-    title: 'No-Code + IA',
-    text: 'Transformer un processus en workflow, connecter les outils et intégrer l’intelligence artificielle lorsqu’elle apporte une vraie valeur.'
+    title: 'Systèmes + solutions',
+    text: 'Comprendre les fondations techniques, relier les outils et construire une réponse adaptée au besoin rencontré.'
   },
   'output-a': {
-    title: 'Solutions',
-    text: 'Des solutions digitales simples à utiliser, testables rapidement et orientées vers un besoin métier identifiable.'
+    title: 'Fiabilité',
+    text: 'Des systèmes et des solutions compréhensibles, testables et adaptés à un besoin clairement identifié.'
   },
   'output-b': {
     title: 'Adoption',
-    text: 'Une automatisation n’est utile que si les personnes qui travaillent avec elle la comprennent et l’adoptent.'
+    text: 'Une technologie devient réellement utile lorsque les personnes qui travaillent avec elle la comprennent et peuvent se l’approprier.'
   }
 };
 
@@ -58,7 +58,7 @@ const careerData = {
     points: [
       'Accompagnement de proches dans leurs retours vers l’autonomie.',
       'Aide à l’utilisation de l’IA auprès de proches, de résidents et de personnel en EHPAD.',
-      'Évolution professionnelle progressive vers les métiers de l’IT, puis du No-Code, de l’automatisation et de l’IA appliquée.'
+      'Évolution progressive vers les systèmes et réseaux, le cloud, puis le No-Code, l’automatisation et l’IA appliquée.'
     ],
     tags: ['Résilience', 'Accompagnement', 'Veille professionnelle']
   },
