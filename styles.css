@@ -112,3 +112,57 @@
   .contact-icon { width:38px; height:38px; flex:0 0 38px; }
   .site-footer { padding-inline:14px; }
 }
+
+/* Refonte locale — accueil panoramique */
+.hero{
+  min-height:auto;
+  grid-template-columns:1fr;
+  gap:30px;
+  align-items:start;
+  padding-top:72px;
+  padding-bottom:68px;
+}
+.hero-copy{max-width:none}
+.hero h1{
+  max-width:1180px;
+  font-size:clamp(3.2rem,6.4vw,5.5rem);
+  line-height:.95;
+}
+.hero-intro{max-width:930px}
+.hero-actions{margin:24px 0 0}
+.hero-visual{width:100%;margin-top:2px}
+.workflow-card{
+  width:100%;
+  max-width:none;
+  height:310px;
+  margin:0;
+}
+.workflow-lines{inset:48px 0 0;height:calc(100% - 48px)}
+.node{width:190px;top:35%}
+.node-need{left:2.5%}
+.node-nocode{left:27.5%}
+.node-ai{left:50.9%;right:auto;width:225px}
+.node-ai strong{white-space:nowrap}
+.node-impact{left:77%;bottom:auto}
+.flow-caption{bottom:14px}
+
+@media (max-width:900px) and (min-width:701px){
+  .hero{gap:26px;padding-top:44px;padding-bottom:54px}
+  .hero h1{font-size:clamp(3.1rem,7.4vw,4.7rem)}
+  .workflow-card{height:290px !important;max-width:none}
+  .node{width:160px;top:34% !important}
+  .node-need{left:2% !important}
+  .node-nocode{left:26.5% !important;transform:none !important}
+  .node-ai{left:49% !important;right:auto !important;width:180px}
+  .node-impact{left:75.5% !important;bottom:auto !important;transform:none !important}
+}
+
+@media (max-width:700px){
+  .hero{gap:26px;padding-top:28px;padding-bottom:52px}
+  .hero h1{font-size:clamp(2.75rem,13vw,4.1rem)}
+  .workflow-card{height:auto !important;max-width:680px;margin-inline:auto;padding-bottom:18px;overflow:visible}
+  .workflow-lines{display:none}
+  .node{position:relative !important;inset:auto !important;transform:none !important;width:auto;margin:12px 14px 0}
+  .node-need,.node-ai,.node-nocode,.node-impact{left:auto !important;right:auto !important;top:auto !important;bottom:auto !important}
+  .flow-caption{position:relative !important;inset:auto !important;margin:18px 14px 0;padding-top:14px;border-top:1px solid var(--line)}
+}
