@@ -9,7 +9,7 @@
 .chapter+.chapter{padding-top:100px}
 .chapter-heading{display:grid;grid-template-columns:160px 1fr;gap:28px;align-items:start;margin-bottom:42px;padding-bottom:28px;border-bottom:1px solid var(--line)}
 .chapter-index{padding-top:10px;color:var(--mint);font-size:.72rem;letter-spacing:.12em}
-.chapter-heading h2{max-width:820px;margin:0;font-size:clamp(2.5rem,5vw,4.8rem);line-height:.98;letter-spacing:-.045em}
+.chapter-heading h2{max-width:none;margin:0;font-size:clamp(1.9rem,3.2vw,3rem);line-height:1.05;letter-spacing:-.035em;white-space:nowrap}
 .chapter-heading p{max-width:710px;margin:16px 0 0;color:#9fa9b8;font-size:1.02rem}
 .interview-flow{display:grid;gap:34px}
 .exchange{display:grid;grid-template-columns:minmax(270px,.72fr) minmax(0,1.28fr);gap:18px;align-items:start}
@@ -25,4 +25,4 @@
 .closing-card>p{color:#bac4d2}.closing-card>p:first-of-type{margin-top:18px;color:#fff;font-size:1.1rem;font-weight:700}.closing-card blockquote{margin:22px 0;padding-left:22px;border-left:2px solid var(--accent);color:#eef1f6;font-size:clamp(1.2rem,2.2vw,1.65rem);line-height:1.5}
 .interview-contact{padding-top:90px}.interview-contact .contact-panel{margin-top:0}
 @media(max-width:1080px){.interview-intro h1{white-space:normal}.exchange{grid-template-columns:1fr}.question-card{position:relative;top:auto}.closing-card{margin-left:0}}
-@media(max-width:700px){.interview-hero{padding-top:42px;padding-bottom:38px}.interview-intro h1{font-size:clamp(3.2rem,16vw,5rem)}.interview-lead{font-size:1.02rem}.chapter{padding-top:32px}.chapter+.chapter{padding-top:72px}.chapter-heading{grid-template-columns:1fr;gap:10px;margin-bottom:28px}.chapter-index{padding-top:0}.question-card{padding:22px}.answer-card{padding:24px 22px}.answer-card p{font-size:1rem;line-height:1.68}.closing-card{padding:26px 22px}.interview-contact{padding-top:64px}}
+@media(max-width:700px){.interview-hero{padding-top:42px;padding-bottom:38px}.interview-intro h1{font-size:clamp(3.2rem,16vw,5rem)}.interview-lead{font-size:1.02rem}.chapter{padding-top:32px}.chapter+.chapter{padding-top:72px}.chapter-heading{grid-template-columns:1fr;gap:10px;margin-bottom:28px}.chapter-index{padding-top:0}.chapter-heading h2{font-size:clamp(1.75rem,8vw,2.35rem);white-space:normal}.question-card{padding:22px}.answer-card{padding:24px 22px}.answer-card p{font-size:1rem;line-height:1.68}.closing-card{padding:26px 22px}.interview-contact{padding-top:64px}}
