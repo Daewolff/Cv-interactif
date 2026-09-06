@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Les réseaux façon Audiard — cinq scènes pour découvrir le métier de technicien réseau, le dépannage, la documentation, CDP et le helpdesk avec pédagogie et humour." />
+  <meta name="theme-color" content="#090b10" />
+  <title>Vulgarisation — Les réseaux façon Audiard</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="vulgarisation.css" />
+</head>
+<body class="vulgarisation-page">
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="../index.html" aria-label="Retour au portfolio de David Genty">
+      <span class="brand-mark">DG</span>
+      <span class="brand-copy"><strong>DAVID GENTY</strong><small>Vulgarisation / Réseaux</small></span>
+    </a>
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false"><span></span><span></span></button>
+    <nav class="main-nav" aria-label="Navigation de la page">
+      <a href="#scenes">Les cinq scènes</a>
+      <a href="../le-coin-des-tests.html">Le coin des tests</a>
+      <a href="../interview.html">Entretien</a>
+      <a class="nav-cta" href="../index.html">Portfolio ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="vulgarisation-hero section-shell reveal" aria-labelledby="vulgarisation-title">
+      <p class="eyebrow"><span></span> VULGARISATION · SYSTÈMES ET RÉSEAUX</p>
+      <h1 id="vulgarisation-title">Les réseaux<br /><em>façon Audiard.</em></h1>
+      <div class="hero-summary">
+        <p>Une autre manière d’aborder le métier de technicien réseau : conserver la rigueur technique, mais raconter les situations avec des images simples, des dialogues et une pointe d’humour.</p>
+        <div class="hero-meta"><span>05 scènes</span><span>12 illustrations</span><span>Dépannage · CDP · Helpdesk</span></div>
+      </div>
+    </section>
+
+    <section class="lesson-shell section-shell" id="scenes" aria-label="Les cinq scènes de vulgarisation">
+      <nav class="scene-tabs" role="tablist" aria-label="Choisir une scène">
+        <button class="tab-link active" type="button" role="tab" aria-selected="true" aria-controls="scene1" data-scene="scene1"><small>01</small><span>Le dépannage</span></button>
+        <button class="tab-link" type="button" role="tab" aria-selected="false" aria-controls="scene2" data-scene="scene2"><small>02</small><span>Les méthodes</span></button>
+        <button class="tab-link" type="button" role="tab" aria-selected="false" aria-controls="scene3" data-scene="scene3"><small>03</small><span>La documentation</span></button>
+        <button class="tab-link" type="button" role="tab" aria-selected="false" aria-controls="scene4" data-scene="scene4"><small>04</small><span>Le protocole CDP</span></button>
+        <button class="tab-link" type="button" role="tab" aria-selected="false" aria-controls="scene5" data-scene="scene5"><small>05</small><span>Le helpdesk</span></button>
+      </nav>
+
+      <div class="container">
+
+        <div id="scene1" class="scene-content active">
+            <h2>🎬 SCÈNE 1 — “Le Dépannage, mon p’tit vieux, c’est pas de la magie…”</h2>
+            <div class="meta">(Version Audiardisée, fidèle au cours, avec une pincée de mauvaise foi et de câbles torsadés)</div>
+            
+            <div class="section-title">🎭 Ouverture : le technicien entre en scène</div>
+            
+            <img src="vulgarisation-01.jpg" alt="Illustration de la scène réseau 1" class="scene-image" onerror="this.style.display='none';">
+
+            <p>Dans un bureau gris, un néon qui clignote, un PC qui tousse… Le technicien réseau pousse la porte comme un flic fatigué qui a trop vu de crimes commis par des imprimantes WiFi.</p>
+            <p>Il soupire, regarde la machine, et lâche :</p>
+            <p>“Le dépannage, mon gars, c’est pas de la magie. C’est de l’artisanat. Faut identifier, localiser et corriger les problèmes.” (comme dit dans le cours : « Le dépannage consiste à identifier, à localiser et à corriger les problèmes. »)</p>
+            
+            <div class="section-title">🎭 Le symptôme : l’utilisateur arrive, catastrophé</div>
+            <p>L’utilisateur débarque, les yeux écarquillés, la chemise froissée :</p>
+            <p>— “Le réseau est en panne ! Tout est mort ! Même la souris répond plus !”</p>
+            <p>Le technicien, lui, il a l’habitude. Il sait que dans 80 % des cas, la souris est juste débranchée.</p>
+            <p>Alors il note calmement :</p>
+            <p>“Bon… déjà, on va définir le problème. Parce que si je pars sur tes émotions, on va finir par appeler les pompiers.”</p>
+
+            <img src="vulgarisation-02.jpg" alt="Illustration de la scène réseau 2" class="scene-image" onerror="this.style.display='none';">
+
+            <div class="section-title">🎭 Collecte d’infos : l’enquête commence</div>
+            <p>Le technicien sort son carnet, façon inspecteur Colombo :</p>
+            <p>— “Alors, mon p’tit père… c’est un seul PC qui rame, ou tout l’immeuble ?”</p>
+            <p>— “Euh… je crois que c’est moi.” — “Ah bah voilà, on avance.”</p>
+            <p>Comme dit dans le cours :</p>
+            <p>« Lors de la collecte de symptômes, il est important que l'administrateur réseau pose des questions et analyse le problème afin de diminuer le nombre de possibilités. »</p>
+            <p>Il regarde la machine, l’utilisateur, la prise murale. Il sait que tout peut être coupable : un câble, un switch, un DHCP en grève, ou juste un stagiaire trop motivé.</p>
+            
+            <div class="section-title">🎭 Rassembler les infos : le technicien fouille la scène du crime</div>
+            <p>Il ouvre le panneau arrière du PC comme on ouvre un coffre de voiture suspecte.</p>
+            <p>— “Fabricant ? Modèle ? Version du micrologiciel ? T’as touché à quelque chose ?”</p>
+            <p>L’utilisateur : — “J’ai juste cliqué sur un truc.”</p>
+            <p>Le technicien : — “Ah bah voilà. On a un suspect.”</p>
+            <p>Dans le cours, on dit :</p>
+            <p>« Collecter des informations pertinentes sur l’équipement : fabricant, modèle, version du micrologiciel… »</p>
+            <p>Dans la vraie vie, ça veut dire : “Regarder si quelqu’un a foutu le bazar.”</p>
+            
+            <div class="section-title">🎭 Analyse : le cerveau chauffe</div>
+            <p>Le technicien se gratte la tête. Il compare ce qu’il voit avec ce qu’il sait, ce qu’il a déjà vécu, et ce qu’il redoute.</p>
+            <p>Comme dans le cours :</p>
+            <p>« L'information recueillie est interprétée et analysée à l'aide de la documentation réseau, des lignes de base, de la recherche… »</p>
+            <p>En Audiard, ça donne : “Tu prends tout ce que t’as vu, tout ce que t’as senti, et tu fais mijoter. Et si ça sent le cramé, c’est que t’es sur la bonne piste.”</p>
+            
+            <div class="section-title">🎭 Éliminer les causes : le tri sélectif</div>
+            <p>Le technicien teste, débranche, rebranche, soupire, reteste.</p>
+            <p>— “Bon, c’est pas le câble. C’est pas le switch. C’est pas la carte réseau. C’est pas le DHCP. C’est pas le DNS…”</p>
+            <p>L’utilisateur : — “C’est grave ?”</p>
+            <p>— “Non. C’est juste toi.”</p>
+            
+            <div class="section-title">🎭 Proposer une hypothèse : le moment Sherlock Holmes</div>
+            <p>Le technicien annonce :</p>
+            <p>— “J’ai une théorie. Une hypothèse. Un truc solide.”</p>
+            <p>Dans le cours :</p>
+            <p>« Lorsque la cause la plus probable a été identifiée, une solution doit être formulée. »</p>
+            <p>Dans la vraie vie : “Je pense que t’as cliqué là où fallait pas.”</p>
+            
+            <div class="section-title">🎭 Tester l’hypothèse : la roulette russe du réseau</div>
+            <p>Avant de toucher quoi que ce soit, il prévient :</p>
+            <p>— “Si je fais ça maintenant, ça peut couper le réseau de tout l’étage. Tu veux que je tente ?”</p>
+            <p>L’utilisateur blêmit. — “Euh… non.”</p>
+            <p>Comme dit dans le cours :</p>
+            <p>« Il est important d'évaluer l'impact et l'urgence du problème. »</p>
+            
+            <div class="section-title">🎭 Résolution : le final en fanfare</div>
+            <p>Le technicien clique, tape deux commandes, redémarre un service. Le PC revient à la vie.</p>
+            <p>L’utilisateur : — “Vous êtes un génie !”</p>
+            <p>Le technicien : — “Non. J’ai juste lu le ticket.”</p>
+            <p>Et il documente tout, parce que le cours dit :</p>
+            <p>« Il est important de documenter correctement la cause et la solution. »</p>
+            <p>Et aussi parce qu’il sait que demain, quelqu’un refera exactement la même bêtise.</p>
+
+            <img src="vulgarisation-03.jpg" alt="Illustration de la scène réseau 3" class="scene-image" onerror="this.style.display='none';">
+        </div>
+
+        <div id="scene2" class="scene-content">
+            <h2>🎬 SCÈNE 2 — “Les méthodes de dépannage : la bande des sept”</h2>
+            <div class="meta">(Version Audiardisée, fidèle au cours, avec l’esprit grande gueule et tendre des Tontons Flingueurs)</div>
+            
+            <div class="section-title">🎭 Introduction : le technicien et ses méthodes</div>
+            <p>Dans le métier, chacun a sa méthode. Y en a qui commencent par le bas, d’autres par le haut, certains coupent le réseau en deux comme un rôti du dimanche… Bref : sept méthodes, sept caractères, sept façons de régler les embrouilles d’un réseau qui fait sa diva.</p>
+            <p>Le cours dit : « Plusieurs méthodes de dépannage structurées peuvent être utilisées… » Moi je te les présente comme une bande de lascars, chacun avec son style.</p>
+            
+            <div class="section-title">🎬 La bande des sept — version Audiard</div>
+
+            <img src="vulgarisation-04.jpg" alt="Illustration de la scène réseau 4" class="scene-image" onerror="this.style.display='none';">
+
+            <p>🕶 ️ 1. BottomUp — “Le mécano du réseau”</p>
+            <p>Lui, c’est le gars qui commence toujours par regarder si c’est branché. Un philosophe du câble.</p>
+            <p>— “On va pas s’exciter, les enfants. On commence par la couche physique. On remonte ensuite. Comme un plombier, mais avec des octets.”</p>
+            <p>Il suit le cours à la lettre :</p>
+            <p>« Commencez par la couche physique… »</p>
+            <p>En Audiard : “Quand t’as un problème, commence par vérifier que personne a tiré sur le fil. Ça évite de passer pour un clown.”</p>
+            
+            <p>🧳 2. TopDown — “Le bourgeois raffiné”</p>
+            <p>Lui, il commence par les applications. Il regarde le réseau comme un critique gastronomique regarde une assiette.</p>
+            <p>— “Voyons voir si Outlook respire encore… ah, il tousse. Donc on descend.”</p>
+            <p>Le cours dit :</p>
+            <p>« Commencez par les applications de l’utilisateur final… »</p>
+            <p>En Audiard : “Tu commences par le haut, because c’est là que ça gueule le plus fort.”</p>
+            
+            <div class="section-title">🔪 3. Diviser pour régner — “Le stratège romain”</div>
+
+            <img src="vulgarisation-05.jpg" alt="Illustration de la scène réseau 5" class="scene-image" onerror="this.style.display='none';">
+
+            <p>Lui, il coupe le réseau en deux. Puis encore en deux. Puis encore.</p>
+            <p>— “On va isoler le coupable. Comme au commissariat, mais sans la lampe dans la figure.”</p>
+            <p>Le cours dit :</p>
+            <p>« Documentez les symptômes et devinez quelle couche OSI doit être examinée. »</p>
+            <p>En Audiard : “Quand tu sais pas d’où ça vient, tu coupes en deux. Si ça marche d’un côté, c’est l’autre qui fout la merde.”</p>
+            
+            <p>🛣 ️ 4. Suivre le chemin — “Le détective privé”</p>
+            <p>Lui, il suit les paquets comme un flic suit une bagnole volée.</p>
+            <p>— “On part de la source, on va à la destination, et on regarde où ça se perd. Comme les impôts.”</p>
+            <p>Le cours dit :</p>
+            <p>« Découvrir le chemin du trafic de la source à la destination. »</p>
+            <p>En Audiard : “Tu suis la route. Si ça pue à un carrefour, c’est qu’il s’est passé un truc louche.”</p>
+            
+            <p>🔧 5. Substitution — “Le chirurgien du dimanche”</p>
+            <p>Lui, il remplace. Il change la pièce. Il met un truc neuf.</p>
+            <p>— “On va mettre un switch propre. Si ça marche, c’est que l’ancien était aussi fatigué que moi un lundi matin.”</p>
+            <p>Le cours dit :</p>
+            <p>« Remplacez physiquement le périphérique… »</p>
+            <p>En Audiard : “Quand t’as un doute, tu changes la pièce. C’est pas élégant, mais ça marche.”</p>
+            
+            <p>🧩 6. Comparaison — “Le maniaque du détail”</p>
+            <p>Lui, il compare tout. Les configs, les versions, les câbles, les ports, les humeurs du DHCP…</p>
+            <p>— “Regarde : celui-là marche, celui-là marche pas. Y a forcément un truc qui cloche.”</p>
+            <p>Le cours dit :</p>
+            <p>« Comparez des configurations, versions logicielles… »</p>
+            <p>En Audiard : “Deux trucs identiques qui font pas la même chose, c’est qu’il y en a un qui ment.”</p>
+            
+            <p>🎯 7. Estimation éclairée — “Le vieux briscard”</p>
+            <p>Lui, c’est le vétéran. Il a vu des réseaux tomber avant que tu sois né.</p>
+            <p>— “J’le sens. C’est le DNS. C’est toujours le DNS.”</p>
+            <p>Le cours dit :</p>
+            <p>« Méthode moins structurée basée sur l’expérience… »</p>
+            <p>En Audiard : “Quand t’as trente ans de métier, tu réfléchis plus : tu devines. Et souvent, t’as raison.”</p>
+            
+            <div class="section-title">🎬 Fin de la scène 2</div>
+            <p>La bande des sept est en place. Chacun sa méthode, chacun son style.</p>
+            <p>Mais tous ont un point commun : ils sauvent le réseau avant que quelqu’un ne propose de redémarrer la box.</p>
+        </div>
+
+        <div id="scene3" class="scene-content">
+            <h2>🎬 SCÈNE 3 — “La Documentation : Sans plan, t’es un marin sans boussole”</h2>
+            <div class="meta">(Version Audiardisée, fidèle au cours, avec l’ambiance d’un polar où le réseau est un quartier louche)</div>
+            
+            <div class="section-title">🎭 Ouverture : le technicien face au chaos</div>
+
+            <img src="vulgarisation-06.jpg" alt="Illustration de la scène réseau 6" class="scene-image" onerror="this.style.display='none';">
+
+            <p>Le technicien arrive dans une salle serveurs qui ressemble à un plat de spaghettis tombé par terre.</p>
+            <p>Des câbles partout, des étiquettes écrites au marqueur, un switch qui clignote comme un sapin de Noël sous acide.</p>
+            <p>Il lâche, fataliste :</p>
+            <p>“Sans documentation, mon p’tit père, t’es comme un marin sans boussole : tu vas droit dans le mur, mais tu sais même pas lequel.”</p>
+            <p>Le cours, lui, dit ça plus poliment :</p>
+            <p>« Une documentation réseau précise et complète est nécessaire pour surveiller et dépanner efficacement les réseaux. »</p>
+            <p>Mais Audiard aurait dit : “Si t’as pas de plan, t’as pas de réseau. T’as juste un bordel organisé par un stagiaire.”</p>
+            
+            <div class="section-title">🎭 La documentation : le grimoire sacré</div>
+            <p>Dans un tiroir poussiéreux, le technicien trouve un classeur. Un vieux truc jauni, avec écrit dessus : “Plan réseau — version 2014”.</p>
+            <p>Il souffle dessus. Une araignée sort.</p>
+            <p>— “Bon… ça va pas nous aider, ça.”</p>
+            <p>Le cours explique :</p>
+            <p>« Toute la documentation du réseau doit être conservée en un seul endroit… et la sauvegarde ailleurs. »</p>
+            <p>En Audiard : “Tu mets tout au même endroit, mais pas trop, sinon quand ça crame, t’as plus rien.”</p>
+            
+            <div class="section-title">🎭 Topologie physique : la carte du territoire</div>
+            <p>Le technicien ouvre un schéma. On dirait un plan de métro dessiné par un enfant hyperactif.</p>
+            <p>— “Alors ça, c’est la topologie physique. Ça te dit où sont les bêtes et comment elles sont attachées.”</p>
+            <p>Le cours dit :</p>
+            <p>« La topologie identifie l’emplacement physique et la fonction des périphériques. »</p>
+            <p>En Audiard : “C’est la carte du quartier. Si tu sais pas où sont les voyous, tu peux pas les arrêter.”</p>
+
+            <img src="vulgarisation-07.jpg" alt="Illustration de la scène réseau 7" class="scene-image" onerror="this.style.display='none';">
+            
+            <div class="section-title">🎭 Topologie logique : la carte mentale du réseau</div>
+            <p>Puis il tombe sur un autre schéma, encore plus tordu.</p>
+            <p>— “Et ça, c’est la topologie logique. Là, c’est plus les câbles, c’est les idées. Les VLAN, les IP, les routes… bref, le cerveau du réseau.”</p>
+            <p>Le cours dit :</p>
+            <p>« La figure illustre les interfaces de connexion et le schéma d’adressage réseau de couche 3. »</p>
+            <p>En Audiard : “C’est pas because deux machines sont voisines qu’elles se parlent. Comme les voisins du dessus.”</p>
+            
+            <div class="section-title">🎭 Les réseaux d’entreprise : le mille-feuille infernal</div>
+            <p>Le technicien regarde les différents schémas : un pour les VLAN, un pour les VPN, un pour le cloud, un pour les accès distants…</p>
+            <p>Il soupire :</p>
+            <p>— “Un réseau d’entreprise, c’est comme une famille recomposée : tout le monde est censé s’aimer, mais personne sait qui dort où.”</p>
+            <p>Le cours dit :</p>
+            <p>« La documentation inclut plusieurs diagrammes présentant différents niveaux de détail. »</p>
+            <p>En Audiard : “Plus c’est gros, plus faut des plans. Sinon tu finis par chercher un routeur comme on cherche un chat dans un entrepôt.”</p>
+            
+            <div class="section-title">🎭 La base de référence : le “bilan de santé” du réseau</div>
+            <p>Le technicien ouvre un fichier Excel. Des colonnes, des chiffres, des courbes.</p>
+            <p>— “Ça, c’est la base de référence. Le réseau quand il va bien. Comme une photo avant la dépression.”</p>
+            <p>Le cours dit :</p>
+            <p>« Une ligne de base est utilisée pour établir les performances normales d’un réseau. »</p>
+            <p>En Audiard : “Si tu sais pas comment il marche quand il va bien, tu sauras jamais pourquoi il va mal.”</p>
+
+            <img src="vulgarisation-08.jpg" alt="Illustration de la scène réseau 8" class="scene-image" onerror="this.style.display='none';">
+            
+            <div class="section-title">🎭 Sans documentation : le cauchemar</div>
+            <p>Le technicien imagine un réseau sans doc. Il frissonne.</p>
+            <p>— “Sans doc, tu dépannes au pif. Et le pif, c’est bien pour choisir un vin, pas pour réparer un firewall.”</p>
+            <p>Le cours dit :</p>
+            <p>« Sans base de référence, il n’existe aucune norme pour mesurer… »</p>
+            <p>En Audiard : “Sans repères, tu pédales dans la semoule.”</p>
+            
+            <div class="section-title">🎬 Fin de la Scène 3</div>
+            <p>La documentation, c’est pas glamour. C’est pas héroïque. Mais c’est ce qui évite que le réseau parte en vrille à la première mise à jour Windows.</p>
+        </div>
+
+        <div id="scene4" class="scene-content">
+            <h2>🎬 SCÈNE 4 — “CDP : Le voisin qui balance tout le monde”</h2>
+            <div class="meta">(Version Audiardisée, fidèle au cours, avec l’ambiance d’un immeuble où tout le monde écoute derrière la porte)</div>
+            
+            <div class="section-title">🎭 Ouverture : le technicien découvre un réseau… muet</div>
+
+            <img src="vulgarisation-09.jpg" alt="Illustration de la scène réseau 9" class="scene-image" onerror="this.style.display='none';">
+
+            <p>Le technicien arrive devant un routeur qui ne dit rien, ne montre rien, ne documente rien. Un vrai taiseux.</p>
+            <p>Le genre d’appareil qui ferait passer un coffre-fort pour un moulin à paroles.</p>
+            <p>Il grogne :</p>
+            <p>“Bon… on sait que R1 est connecté à un truc. Mais quoi ? Mystère et boule de gomme.”</p>
+            <p>Le cours dit exactement :</p>
+            <p>« Tout ce que l’administrateur réseau sait, c’est que R1 est connecté à un autre périphérique. »</p>
+            <p>En Audiard : “On a un câble qui part, mais on sait pas où il finit. C’est comme un type qui sort acheter des clopes et qu’on revoit jamais.”</p>
+            
+            <div class="section-title">🎭 Entrée en scène de CDP : le voisin commère</div>
+            <p>CDP, c’est le voisin du 3ᵉ qui regarde par le judas et qui raconte tout ce qu’il voit.</p>
+            <p>Un vrai bavard. Un délateur professionnel.</p>
+            <p>Le cours dit :</p>
+            <p>« Le CDP est un protocole de couche 2… utilisé pour recueillir des informations sur les appareils Cisco. »</p>
+            <p>En Audiard : “CDP, c’est le gars qui te dit qui habite où, avec qui, et sur quel port il branche sa multiprise.”</p>
+            
+            <div class="section-title">🎭 La commande magique : show cdp neighbors</div>
+            <p>Le technicien tape la commande. Et là, miracle : CDP se met à table.</p>
+            <p>— “Alors chef, sur ton interface G0/0/1, t’as un S1 branché en F0/5. C’est un Catalyst 3560. Et il dit bonjour toutes les 60 secondes.”</p>
+            <p>Le cours dit :</p>
+            <p>« Identificateurs de périphérique, identificateur de port, liste de capacités, plate-forme… »</p>
+            <p>En Audiard : “Il te donne le nom, l’adresse, le métier, et même la taille des chaussures.”</p>
+            
+            <div class="section-title">🎭 show cdp neighbors detail : la délation niveau expert</div>
+            <p>Le technicien insiste : — “Et son adresse IP, tu l’as ?”</p>
+            <p>CDP répond : — “192.168.1.2, chef.”</p>
+            <p>Le cours dit :</p>
+            <p>« L’administrateur utilise show cdp neighbors detail pour découvrir l’adresse IP. »</p>
+            <p>En Audiard : “Le voisin, non seulement il balance, mais il donne aussi le numéro de portable.”</p>
+            
+            <div class="section-title">🎭 Le technicien remonte la piste</div>
+            <p>Il se connecte à S1. Il relance CDP. Et là, CDP continue de parler comme une concierge en pleine forme :</p>
+            <p>— “S2 est branché sur F0/1. Un Catalyst 2960. Il est sage, il bouge pas.”</p>
+            <p>Le cours dit :</p>
+            <p>« Le seul périphérique connecté à S2 est S1. »</p>
+            <p>En Audiard : “C’est un petit réseau tranquille. Pas de mafia, pas de trafic louche. Juste deux commutateurs qui se tiennent compagnie.”</p>
+            
+            <img src="vulgarisation-10.jpg" alt="Illustration de la scène réseau 10" class="scene-image" onerror="this.style.display='none';">
+
+            <div class="section-title">🎭 Fin de l’enquête : la topologie complète apparaît</div>
+            <p>Grâce à CDP, le technicien a reconstruit toute la topologie. Sans doc, sans plan, sans rien.</p>
+            <p>Juste avec un protocole qui adore raconter la vie des autres.</p>
+            <p>Le cours dit :</p>
+            <p>« L’administrateur réseau peut désormais mettre à jour la documentation. »</p>
+            <p>En Audiard : “Quand t’as un voisin qui parle trop, tu peux reconstruire tout l’immeuble.”</p>
+            
+            <div class="section-title">🎬 Fin de la Scène 4</div>
+            <p>CDP, c’est pas un héros. C’est pas un génie. Mais c’est le gars qui te dit tout ce que les autres veulent cacher.</p>
+            <p>Et dans un réseau mal documenté, c’est souvent lui qui sauve la mise.</p>
+        </div>
+
+        <div id="scene5" class="scene-content">
+            <h2>🎬 SCÈNE 5 — “Le Helpdesk : Comprendre un utilisateur qui dit n’importe quoi”</h2>
+            <div class="meta">(Version Audiardisée, fidèle au cours, avec l’ambiance d’un commissariat où les suspects s’appellent “Outlook”, “WiFi” et “Imprimante réseau”)</div>
+            
+            <div class="section-title">🎭 Ouverture : le Helpdesk, c’est pas un métier, c’est un sport de combat</div>
+            <p>Le technicien du centre d’assistance, c’est un peu le psy, le flic, le pompier et le magicien de l’entreprise.</p>
+            <p>Il reçoit tout : les plaintes, les cris, les mensonges, les drames, les “ça marchait hier”.</p>
+            <p>Il s’assoit, craque ses doigts, et dit :</p>
+            <p>“Allez, envoyez le premier. J’ai connu des imprimantes plus honnêtes que certains utilisateurs.”</p>
+            <p>Le cours dit :</p>
+            <p>« Un service d’assistance est le point de contact central pour les employés. »</p>
+            <p>En Audiard : “C’est le guichet où tout le monde vient pleurer quand le PC fait la gueule.”</p>
+
+            <img src="vulgarisation-11.jpg" alt="Illustration de la scène réseau 11" class="scene-image" onerror="this.style.display='none';">
+            
+            <div class="section-title">🎭 L’utilisateur arrive : la catastrophe ambulante</div>
+            <p>L’utilisateur débarque, paniqué comme si son PC venait de déclarer la Troisième Guerre Mondiale.</p>
+            <p>— “Le réseau est en panne ! Je peux plus envoyer mes mails ! Tout est mort !”</p>
+            <p>Le technicien, imperturbable : — “Vous avez essayé d’allumer l’écran ?”</p>
+            <p>L’utilisateur regarde l’écran noir. Il appuie. Ça s’allume.</p>
+            <p>— “…ah.”</p>
+            <p>Le cours dit :</p>
+            <p>« Les utilisateurs fournissent souvent des informations vagues et parfois trompeuses. »</p>
+            <p>En Audiard : “Un utilisateur, ça dit ‘tout marche pas’, alors que c’est juste le câble qui pendouille.”</p>
+            
+            <div class="section-title">🎭 Le ticket : la fiche d’interrogatoire</div>
+            <p>Le technicien ouvre le logiciel de tickets. Il tape comme un greffier :</p>
+            <p>Qui ?<br>Quoi ?<br>Quand ?<br>Depuis quand ?</p>
+            <p>Et surtout : “Qu’est-ce que vous avez touché avant que ça casse ?”</p>
+            <p>Le cours dit :</p>
+            <p>« Le technicien doit identifier le “qui”, le “quoi” et le “quand”. »</p>
+            <p>En Audiard : “Si tu sais pas qui a fait la connerie, tu peux pas réparer la connerie.”</p>
+            
+            <div class="section-title">🎭 L’art de poser les bonnes questions</div>
+            <p>Le technicien enchaîne :</p>
+            <p>— “Vous étiez connecté en WiFi ou en câble ?” — “Euh… oui.” — “Oui quoi ?”</p>
+            <p>— “Ben… je sais pas.”</p>
+            <p>Le technicien respire profondément. Il a déjà vécu pire. Une fois, un utilisateur avait essayé de brancher un câble RJ45 dans une prise HDMI.</p>
+            <p>Le cours dit :</p>
+            <p>« Utilisez des techniques d’interrogation efficaces… questions ouvertes et fermées. »</p>
+            <p>En Audiard : “Tu poses des questions simples, mais faut pas espérer des réponses intelligentes.”</p>
+            
+            <div class="section-title">🎭 L’écoute active : l’arme secrète</div>
+            <p>Le technicien écoute, note, reformule. Il sait que derrière un “ça marche pas”, il y a souvent un “j’ai cliqué sur un truc que je devais pas”.</p>
+            <p>Le cours dit :</p>
+            <p>« Soyez attentif, compatissant, adaptez votre langage… »</p>
+            <p>En Audiard : “Tu restes poli, même quand t’as envie de hurler. C’est ça, le professionnalisme.”</p>
+            
+            <div class="section-title">🎭 Analyse : le technicien devient Sherlock Holmes</div>
+            <p>Il ouvre une session distante, regarde les logs, teste la connexion.</p>
+            <p>— “Bon… votre PC n’a plus d’adresse IP. Vous avez débranché le câble ?”</p>
+            <p>— “Ah oui, j’ai tiré dessus pour brancher mon chargeur de téléphone.”</p>
+            <p>Le technicien ferme les yeux. Il compte jusqu’à dix. Il rebranche le câble.</p>
+            
+            <div class="section-title">🎭 Résolution ou escalade : le verdict</div>
+            <p>Si c’est simple, il répare. Si c’est compliqué, il escalade.</p>
+            <p>Le cours dit :</p>
+            <p>« Certains problèmes doivent être transmis à un technicien plus expérimenté. »</p>
+            <p>En Audiard : “Quand c’est trop tordu, tu passes le bébé au niveau 2. C’est ça aussi, le travail d’équipe.”</p>
+            
+            <div class="section-title">🎭 Clôture du ticket : la paix retrouvée</div>
+            <p>Le technicien écrit la solution dans le ticket. Parce que demain, quelqu’un fera exactement la même bêtise.</p>
+            <p>Le cours dit :</p>
+            <p>« La mise à jour du ticket est importante… elle alimente la base de connaissances. »</p>
+            <p>En Audiard : “Si tu notes pas, tu vas le refaire. Et refaire une connerie deux fois, c’est plus une connerie, c’est une habitude.”</p>
+            
+            <div class="section-title">🎬 Fin de la Scène 5</div>
+            <p>Le Helpdesk, c’est pas juste répondre au téléphone. C’est comprendre l’incompréhensible, traduire le chaos, et réparer les dégâts causés par des gens qui pensent que “WiFi” est une marque de café.</p>
+        
+            <img src="vulgarisation-12.jpg" alt="Illustration de la scène réseau 12" class="scene-image" onerror="this.style.display='none';">
+        
+        </div>
+
+      </div>
+    </section>
+
+    <section class="source-section section-shell reveal" aria-labelledby="source-title">
+      <p class="eyebrow" id="source-title"><span></span> SOURCE PÉDAGOGIQUE</p>
+      <p>Cette adaptation personnelle s’appuie sur des notions étudiées au sein de <a href="https://www.netacad.com/" target="_blank" rel="noopener noreferrer">Cisco Networking Academy ↗</a>. Elle reformule certains principes avec humour afin de les rendre plus faciles à comprendre et à mémoriser.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>DAVID GENTY</strong><span>VULGARISATION · 2026</span></div>
+    <a href="#top">Retour en haut ↑</a>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script src="vulgarisation.js"></script>
+</body>
+</html>
