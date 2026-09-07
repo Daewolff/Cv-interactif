@@ -24,3 +24,30 @@
   .future-flow{display:flex}
   .future-flow>b{transform:none}
 }
+
+/* Titres compacts restaurés */
+.dw-hero h1{
+  font-size:clamp(2.15rem,2.8vw,2.75rem);
+  line-height:1.04;
+  white-space:normal;
+  text-wrap:balance;
+}
+
+.dw-heading h2,
+.current-copy h2,
+.future-copy h2,
+.dw-cta h2{
+  font-size:clamp(1.7rem,1.75vw,1.85rem);
+  line-height:1.12;
+  letter-spacing:-.025em;
+}
+
+@media(max-width:700px){
+  .dw-heading h2,
+  .current-copy h2,
+  .future-copy h2,
+  .dw-cta h2{
+    font-size:clamp(1.7rem,7vw,2.1rem);
+    white-space:normal;
+  }
+}
