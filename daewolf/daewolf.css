@@ -1,6 +1,7 @@
 .daewolf-page{--wolf-blue:#168cff;--wolf-cyan:#38efff;--wolf-deep:#06152b}
 .daewolf-page .ambient-one{background:#075cff;opacity:.17}.daewolf-page .ambient-two{background:#20d6ff;opacity:.11}
 .dw-hero{min-height:calc(100vh - 79px);display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;padding-top:62px;padding-bottom:70px}
+.dw-visual-stack{min-width:0;display:grid;gap:14px}
 .dw-hero-copy{position:relative;z-index:2}.dw-hero h1{max-width:780px;margin:18px 0 25px;font-size:clamp(2.45rem,3.75vw,3.45rem);line-height:1.02;letter-spacing:-.045em;white-space:nowrap}.dw-hero h1 em{font-style:normal;background:linear-gradient(120deg,#f7fbff 0%,var(--wolf-cyan) 40%,#5682ff 100%);-webkit-background-clip:text;background-clip:text;color:transparent}.dw-lead{max-width:720px;color:#b6c2d3;font-size:1.1rem;line-height:1.78}.dw-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}.dw-status{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:24px;color:#929fb1;font-size:.82rem}.dw-status span{display:flex;align-items:center;gap:9px}.dw-status i{width:8px;height:8px;border-radius:50%;background:var(--wolf-cyan);box-shadow:0 0 18px var(--wolf-cyan)}
 .dw-portrait-wrap{position:relative;min-height:680px;display:grid;place-items:end center;border-radius:32px;overflow:hidden;background:radial-gradient(circle at 50% 38%,rgba(22,140,255,.22),transparent 37%),linear-gradient(165deg,rgba(12,21,38,.96),rgba(7,11,18,.92));border:1px solid rgba(56,239,255,.17);box-shadow:var(--shadow)}.dw-portrait-wrap:before{content:"";position:absolute;inset:22px;border:1px solid rgba(255,255,255,.055);border-radius:24px}.dw-portrait-wrap:after{content:"";position:absolute;left:8%;right:8%;bottom:0;height:25%;background:radial-gradient(ellipse at bottom,rgba(22,140,255,.22),transparent 68%)}.dw-portrait-wrap img{position:relative;z-index:2;width:min(94%,610px);height:650px;object-fit:contain;object-position:center bottom;filter:drop-shadow(0 18px 30px rgba(0,0,0,.38))}.dw-orbit{position:absolute;top:10%;left:12%;right:12%;aspect-ratio:1;border:1px solid rgba(56,239,255,.13);border-radius:50%;box-shadow:0 0 80px rgba(22,140,255,.08) inset}.dw-orbit:before,.dw-orbit:after{content:"";position:absolute;border:1px dashed rgba(86,130,255,.14);border-radius:50%}.dw-orbit:before{inset:11%}.dw-orbit:after{inset:24%}.dw-word{position:absolute;z-index:3;color:#8ca0b9;font-size:.62rem;letter-spacing:.2em}.word-one{left:7%;top:18%}.word-two{right:5%;top:39%;writing-mode:vertical-rl}.word-three{left:7%;bottom:28%;writing-mode:vertical-rl;transform:rotate(180deg)}.dw-id-card{position:absolute;z-index:4;right:22px;bottom:20px;display:flex;flex-direction:column;min-width:180px;padding:14px 16px;border-radius:15px;background:rgba(5,10,18,.83);border:1px solid rgba(56,239,255,.18);backdrop-filter:blur(12px)}.dw-id-card small{color:#77879d;font-size:.58rem;letter-spacing:.14em}.dw-id-card strong{font-size:1.05rem;letter-spacing:.08em}.dw-id-card span{color:#aab7c8;font-size:.72rem}
 .dw-section{padding-top:92px;padding-bottom:50px}.dw-heading{max-width:none;margin-bottom:38px}.dw-heading h2,.current-copy h2,.future-copy h2,.dw-cta h2{max-width:none;margin:17px 0 20px;font-size:clamp(1.85rem,2.65vw,2.8rem);line-height:1.08;letter-spacing:-.035em;white-space:nowrap}.dw-heading>p:last-child{max-width:760px;color:#a8b4c5;font-size:1.04rem}
@@ -111,4 +112,221 @@
   }
 
   .dw-id-card strong{padding:0;border:0}
+}
+
+/* Lecteur de la musique de DaeWolf */
+.dw-audio-player{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(145px,.8fr) minmax(0,1.4fr);
+  gap:16px;
+  align-items:center;
+  width:100%;
+  padding:16px 18px;
+  border:1px solid rgba(56,239,255,.17);
+  border-radius:22px;
+  overflow:hidden;
+  background:linear-gradient(145deg,rgba(12,23,39,.96),rgba(7,12,21,.96));
+  box-shadow:0 18px 48px rgba(0,0,0,.22);
+}
+
+.dw-audio-player:before{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  right:-70px;
+  bottom:-105px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(56,239,255,.13),transparent 68%);
+  pointer-events:none;
+}
+
+.dw-audio-copy{
+  min-width:0;
+  padding-right:16px;
+  border-right:1px solid rgba(56,239,255,.13);
+}
+
+.dw-audio-copy small{
+  color:var(--wolf-cyan);
+  font-size:.58rem;
+  font-weight:750;
+  letter-spacing:.15em;
+  white-space:nowrap;
+}
+
+.dw-audio-copy p{
+  margin:7px 0 0;
+  color:#aebaca;
+  font-size:.78rem;
+  line-height:1.45;
+}
+
+.dw-audio-copy p span{
+  display:inline-block;
+  margin-left:3px;
+  color:var(--wolf-cyan);
+  font-size:1rem;
+  transition:transform .2s ease;
+}
+
+.dw-audio-player:hover .dw-audio-copy p span{transform:translateX(3px)}
+
+.dw-audio-console{
+  position:relative;
+  z-index:1;
+  display:grid;
+  gap:9px;
+  min-width:0;
+}
+
+.dw-audio-transport{
+  display:grid;
+  grid-template-columns:repeat(3,34px) minmax(0,1fr);
+  gap:7px;
+  align-items:center;
+}
+
+.dw-audio-button,
+.dw-audio-volume button{
+  display:grid;
+  place-items:center;
+  padding:0;
+  color:#aebaca;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.035);
+  cursor:pointer;
+  transition:border-color .2s ease,background .2s ease,color .2s ease,transform .2s ease;
+}
+
+.dw-audio-button{
+  width:34px;
+  height:34px;
+  border-radius:11px;
+  font-size:.72rem;
+}
+
+.dw-audio-button:hover,
+.dw-audio-button:focus-visible,
+.dw-audio-button.is-active,
+.dw-audio-volume button:hover,
+.dw-audio-volume button:focus-visible{
+  color:#f4feff;
+  border-color:rgba(56,239,255,.38);
+  background:rgba(56,239,255,.1);
+}
+
+.dw-audio-button:hover,
+.dw-audio-volume button:hover{transform:translateY(-1px)}
+
+.dw-audio-timeline{display:grid;gap:5px;min-width:0}
+
+.dw-audio-range{
+  --range-value:0%;
+  width:100%;
+  height:4px;
+  margin:0;
+  border:0;
+  border-radius:999px;
+  outline:none;
+  appearance:none;
+  -webkit-appearance:none;
+  background:linear-gradient(90deg,var(--wolf-cyan) 0 var(--range-value),rgba(255,255,255,.13) var(--range-value) 100%);
+  cursor:pointer;
+}
+
+.dw-audio-range::-webkit-slider-thumb{
+  width:12px;
+  height:12px;
+  border:2px solid #07101d;
+  border-radius:50%;
+  appearance:none;
+  -webkit-appearance:none;
+  background:var(--wolf-cyan);
+  box-shadow:0 0 0 3px rgba(56,239,255,.12),0 0 14px rgba(56,239,255,.35);
+}
+
+.dw-audio-range::-moz-range-thumb{
+  width:9px;
+  height:9px;
+  border:2px solid #07101d;
+  border-radius:50%;
+  background:var(--wolf-cyan);
+  box-shadow:0 0 0 3px rgba(56,239,255,.12),0 0 14px rgba(56,239,255,.35);
+}
+
+.dw-audio-range:focus-visible{
+  box-shadow:0 0 0 3px rgba(56,239,255,.16);
+}
+
+.dw-audio-time{
+  display:flex;
+  justify-content:space-between;
+  color:#728197;
+  font-size:.55rem;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.06em;
+}
+
+.dw-audio-volume{
+  display:grid;
+  grid-template-columns:auto 27px minmax(62px,1fr) 27px 39px;
+  gap:7px;
+  align-items:center;
+}
+
+.dw-audio-volume>span{
+  color:#718197;
+  font-size:.54rem;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+
+.dw-audio-volume button{
+  width:27px;
+  height:25px;
+  border-radius:8px;
+  font-size:.95rem;
+}
+
+.dw-audio-volume output{
+  color:#aebaca;
+  font-size:.63rem;
+  font-variant-numeric:tabular-nums;
+  text-align:right;
+}
+
+.dw-audio-status{
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border:0;
+}
+
+@media(max-width:600px){
+  .dw-audio-player{
+    grid-template-columns:1fr;
+    gap:13px;
+    padding:16px;
+  }
+
+  .dw-audio-copy{
+    padding:0 0 12px;
+    border-right:0;
+    border-bottom:1px solid rgba(56,239,255,.13);
+  }
+
+  .dw-audio-copy p{margin-top:5px}
+}
+
+@media(max-width:420px){
+  .dw-audio-transport{grid-template-columns:repeat(3,34px) minmax(0,1fr)}
+  .dw-audio-timeline{grid-column:1 / -1;margin-top:3px}
+  .dw-audio-volume{grid-template-columns:auto 27px minmax(50px,1fr) 27px 39px}
 }

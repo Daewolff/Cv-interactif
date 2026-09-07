@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#090b10" />
   <title>DaeWolf — Une expérience narrative interactive</title>
   <link rel="stylesheet" href="../styles.css" />
-  <link rel="stylesheet" href="daewolf.css?v=20260907-nowrap" />
+  <link rel="stylesheet" href="daewolf.css?v=20260907-audio" />
 </head>
 <body class="daewolf-page">
   <div class="ambient ambient-one" aria-hidden="true"></div>
@@ -57,17 +57,63 @@
         </div>
       </div>
 
-      <div class="dw-portrait-wrap reveal" aria-label="DaeWolf, compagnon numérique du projet">
-        <div class="dw-orbit" aria-hidden="true"></div>
-        <span class="dw-word word-one">EXPLORER</span>
-        <span class="dw-word word-two">OBSERVER</span>
-        <span class="dw-word word-three">COMPRENDRE</span>
-        <img src="images/daewolf-portrait.png" alt="DaeWolf debout, les bras croisés, regardant le visiteur avec assurance" />
-        <div class="dw-id-card">
-          <small>COMPAGNON NUMÉRIQUE</small>
-          <strong>DAEWOLF</strong>
-          <span>Une trace à la fois.</span>
+      <div class="dw-visual-stack">
+        <div class="dw-portrait-wrap reveal" aria-label="DaeWolf, compagnon numérique du projet">
+          <div class="dw-orbit" aria-hidden="true"></div>
+          <span class="dw-word word-one">EXPLORER</span>
+          <span class="dw-word word-two">OBSERVER</span>
+          <span class="dw-word word-three">COMPRENDRE</span>
+          <img src="images/daewolf-portrait.png" alt="DaeWolf debout, les bras croisés, regardant le visiteur avec assurance" />
+          <div class="dw-id-card">
+            <small>COMPAGNON NUMÉRIQUE</small>
+            <strong>DAEWOLF</strong>
+            <span>Une trace à la fois.</span>
+          </div>
         </div>
+
+        <section class="dw-audio-player reveal" data-dw-audio-player aria-label="Lecteur de la musique de DaeWolf">
+          <div class="dw-audio-copy">
+            <small>LA MUSIQUE DE DAEWOLF</small>
+            <p>Si jamais vous perdez sa trace, tendez l’oreille <span aria-hidden="true">→</span></p>
+          </div>
+
+          <div class="dw-audio-console">
+            <audio preload="metadata">
+              <source src="audio/daewolf-theme.ogg" type="audio/ogg" />
+              Votre navigateur ne permet pas de lire cette musique.
+            </audio>
+
+            <div class="dw-audio-transport">
+              <button class="dw-audio-button" type="button" data-audio-action="play" aria-label="Lire la musique" title="Lecture">
+                <span aria-hidden="true">▶</span>
+              </button>
+              <button class="dw-audio-button" type="button" data-audio-action="pause" aria-label="Mettre la musique en pause" title="Pause">
+                <span aria-hidden="true">Ⅱ</span>
+              </button>
+              <button class="dw-audio-button" type="button" data-audio-action="stop" aria-label="Arrêter la musique" title="Arrêt">
+                <span aria-hidden="true">■</span>
+              </button>
+
+              <div class="dw-audio-timeline">
+                <input class="dw-audio-range" type="range" min="0" max="100" value="0" step="0.1" data-audio-progress aria-label="Position dans la musique" />
+                <div class="dw-audio-time" aria-label="Temps de lecture">
+                  <span data-audio-current>00:00</span>
+                  <span data-audio-duration>--:--</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dw-audio-volume">
+              <span>VOLUME</span>
+              <button type="button" data-audio-action="volume-down" aria-label="Baisser le volume" title="Baisser le volume">−</button>
+              <input class="dw-audio-range" type="range" min="0" max="100" value="70" step="1" data-audio-volume aria-label="Volume de la musique" />
+              <button type="button" data-audio-action="volume-up" aria-label="Monter le volume" title="Monter le volume">+</button>
+              <output data-audio-volume-output>70%</output>
+            </div>
+          </div>
+
+          <span class="dw-audio-status" data-audio-status aria-live="polite">Musique en pause</span>
+        </section>
       </div>
     </section>
 
@@ -254,5 +300,6 @@
   </footer>
 
   <script src="../script.js"></script>
+  <script src="daewolf.js?v=20260907-audio"></script>
 </body>
 </html>
