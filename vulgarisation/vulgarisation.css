@@ -1,7 +1,7 @@
 .vulgarisation-page{background:radial-gradient(circle at 78% 5%,rgba(214,255,107,.055),transparent 30%),var(--bg)}
 .vulgarisation-page .main-nav{gap:18px}
 .vulgarisation-hero{padding-top:72px;padding-bottom:58px}
-.vulgarisation-hero h1{max-width:1080px;margin:18px 0 30px;font-size:clamp(4rem,9vw,8.4rem);line-height:.87;letter-spacing:-.065em}
+.vulgarisation-hero h1{max-width:none;margin:18px 0 30px;font-size:clamp(2.4rem,4vw,3.25rem);line-height:1.02;letter-spacing:-.045em;white-space:nowrap}
 .vulgarisation-hero h1 em{font-style:normal;color:var(--lime)}
 .hero-summary{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);gap:48px;align-items:end;padding-top:28px;border-top:1px solid var(--line)}
 .hero-summary>p{max-width:760px;margin:0;color:#b3bdca;font-size:1.1rem}
@@ -31,5 +31,5 @@
 .source-section>p:last-child{max-width:850px;margin:0;color:#aeb8c8;font-size:1.04rem}
 .source-section a{color:var(--lime);text-decoration:underline;text-decoration-color:rgba(214,255,107,.35);text-underline-offset:4px}
 @media(max-width:900px){.vulgarisation-hero{padding-top:48px}.hero-summary{grid-template-columns:1fr;gap:24px}.hero-meta{justify-content:flex-start}.scene-tabs{top:68px;display:flex;overflow-x:auto;scrollbar-width:thin}.tab-link{flex:0 0 auto}.tab-link span{overflow:visible}.scene-content h2{font-size:clamp(.82rem,1.9vw,1.05rem)}}
-@media(max-width:620px){.vulgarisation-hero{padding-top:34px;padding-bottom:38px}.vulgarisation-hero h1{font-size:clamp(3.15rem,16vw,5rem);line-height:.91}.hero-summary>p{font-size:1rem}.lesson-shell{width:100%;padding-top:12px}.scene-tabs{margin-inline:12px;border-radius:16px}.scene-content{padding:24px 18px;border-inline:0;border-radius:0}.scene-content h2{font-size:1rem;line-height:1.3;white-space:normal;text-wrap:balance}.scene-content .meta{margin-bottom:30px}.scene-content p{font-size:1rem;line-height:1.68}.section-title{margin-top:36px;font-size:1.03rem}.scene-image{margin:26px auto;border-radius:13px}.source-section{width:min(100% - 28px,1180px);padding-top:64px}}
+@media(max-width:620px){.vulgarisation-hero{padding-top:34px;padding-bottom:38px}.vulgarisation-hero h1{font-size:clamp(2.25rem,11.5vw,3rem);line-height:1.02;white-space:normal;text-wrap:balance}.hero-summary>p{font-size:1rem}.lesson-shell{width:100%;padding-top:12px}.scene-tabs{margin-inline:12px;border-radius:16px}.scene-content{padding:24px 18px;border-inline:0;border-radius:0}.scene-content h2{font-size:1rem;line-height:1.3;white-space:normal;text-wrap:balance}.scene-content .meta{margin-bottom:30px}.scene-content p{font-size:1rem;line-height:1.68}.section-title{margin-top:36px;font-size:1.03rem}.scene-image{margin:26px auto;border-radius:13px}.source-section{width:min(100% - 28px,1180px);padding-top:64px}}
 @media(prefers-reduced-motion:reduce){.scene-content.active{animation:none}}
