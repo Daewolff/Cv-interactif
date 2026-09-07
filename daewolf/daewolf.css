@@ -72,6 +72,7 @@
 
 .dw-id-card small{
   justify-self:end;
+  white-space:nowrap;
 }
 
 .dw-id-card strong{
