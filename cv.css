@@ -153,3 +153,113 @@
   .skill-tab { scroll-snap-align:start; }
   .extra-grid article { padding:17px; }
 }
+
+/* V2.8 — hiérarchie compacte et lecture horizontale */
+.cv-hero{
+  grid-template-columns:minmax(250px,.62fr) minmax(0,1.38fr);
+  gap:30px 34px;
+  align-items:start;
+  padding-top:64px;
+}
+
+.cv-hero-copy{
+  grid-column:1 / -1;
+  width:100%;
+}
+
+.cv-hero h1{
+  margin:14px 0 12px;
+  font-size:clamp(2.4rem,4vw,3.25rem);
+  line-height:1.02;
+  letter-spacing:-.045em;
+  white-space:nowrap;
+}
+
+.cv-role{
+  margin:0 0 18px;
+  font-size:clamp(1.05rem,1.65vw,1.3rem);
+  line-height:1.35;
+  white-space:nowrap;
+}
+
+.cv-role em{color:#aeb8c8}
+.cv-summary{max-width:none;margin:0}
+
+.cv-hero-navigation{
+  grid-column:1;
+  min-width:0;
+}
+
+.cv-actions{margin:0 0 18px}
+.cv-actions .button{width:100%}
+
+.cv-hero-navigation .identity-strip{
+  grid-template-columns:1fr;
+}
+
+.cv-hero-navigation .identity-strip>div{
+  border-right:0;
+  border-bottom:1px solid var(--line);
+}
+
+.cv-hero-navigation .identity-strip>div:last-child{border-bottom:0}
+
+.cv-hero-system{
+  grid-column:2;
+  min-width:0;
+}
+
+.profile-engine{min-height:520px}
+
+.cv-page .section-heading h2,
+.cv-page .contact-panel h2{
+  max-width:none;
+  margin:14px 0 20px;
+  font-size:clamp(1.65rem,1.75vw,1.75rem);
+  line-height:1.12;
+  letter-spacing:-.025em;
+}
+
+.cv-contact .contact-panel{
+  grid-template-columns:1fr;
+  gap:22px;
+  padding:32px 34px;
+}
+
+.cv-contact .contact-data{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+
+.cv-contact .contact-data a{min-width:0}
+.cv-contact .contact-data a span{margin-left:auto}
+
+@media (min-width:951px){
+  .cv-page .section-heading h2,
+  .cv-page .contact-panel h2{white-space:nowrap}
+}
+
+@media (max-width:950px){
+  .cv-hero{grid-template-columns:1fr;gap:26px;padding-top:40px}
+  .cv-hero-copy,
+  .cv-hero-navigation,
+  .cv-hero-system{grid-column:1}
+}
+
+@media (min-width:761px) and (max-width:950px){
+  .cv-hero-navigation .identity-strip{grid-template-columns:repeat(3,1fr)}
+  .cv-hero-navigation .identity-strip>div{border-right:1px solid var(--line);border-bottom:0}
+  .cv-hero-navigation .identity-strip>div:last-child{border-right:0}
+}
+
+@media (max-width:700px){
+  .cv-hero h1,
+  .cv-role,
+  .cv-page .section-heading h2,
+  .cv-page .contact-panel h2{white-space:normal}
+
+  .cv-hero h1{font-size:clamp(2.55rem,14vw,3.45rem)}
+  .cv-contact .contact-panel{padding:24px 22px}
+  .cv-contact .contact-data{grid-template-columns:1fr}
+}

@@ -26,3 +26,76 @@
 .interview-contact{padding-top:90px}.interview-contact .contact-panel{margin-top:0}
 @media(max-width:1080px){.interview-intro h1{white-space:normal}.exchange{grid-template-columns:1fr}.question-card{position:relative;top:auto}.closing-card{margin-left:0}}
 @media(max-width:700px){.interview-hero{padding-top:42px;padding-bottom:38px}.interview-intro h1{font-size:clamp(3.2rem,16vw,5rem)}.interview-lead{font-size:1.02rem}.chapter{padding-top:32px}.chapter+.chapter{padding-top:72px}.chapter-heading{grid-template-columns:1fr;gap:10px;margin-bottom:28px}.chapter-index{padding-top:0}.chapter-heading h2{font-size:clamp(1.75rem,8vw,2.35rem);white-space:normal}.question-card{padding:22px}.answer-card{padding:24px 22px}.answer-card p{font-size:1rem;line-height:1.68}.closing-card{padding:26px 22px}.interview-contact{padding-top:64px}}
+
+/* V2.8 — titres et sections alignés sur le portfolio */
+.interview-hero{padding-top:64px;padding-bottom:54px}
+
+.interview-intro h1{
+  margin:18px 0 24px;
+  font-size:clamp(2.4rem,4vw,3.25rem);
+  line-height:1.02;
+  letter-spacing:-.045em;
+  white-space:nowrap;
+}
+
+.interview-lead{max-width:none}
+
+.chapter-heading{
+  grid-template-columns:1fr;
+  gap:7px;
+  margin-bottom:34px;
+  padding-bottom:24px;
+}
+
+.chapter-index{padding-top:0}
+
+.chapter-heading h2,
+.interview-contact .contact-panel h2{
+  max-width:none;
+  margin:0;
+  font-size:clamp(1.65rem,1.75vw,1.75rem);
+  line-height:1.12;
+  letter-spacing:-.025em;
+  white-space:nowrap;
+}
+
+.chapter-heading p{
+  max-width:none;
+  margin:10px 0 0;
+}
+
+.interview-contact .contact-panel{
+  grid-template-columns:1fr;
+  gap:22px;
+  padding:32px 34px;
+}
+
+.interview-contact .contact-panel h2{margin-top:14px}
+
+.interview-contact .contact-data{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+}
+
+.interview-contact .contact-data a{min-width:0}
+.interview-contact .contact-data a span{margin-left:auto}
+
+@media(max-width:900px){
+  .interview-contact .contact-data{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:700px){
+  .interview-intro h1{
+    font-size:clamp(2.55rem,14vw,3.45rem);
+    white-space:normal;
+  }
+
+  .chapter-heading h2,
+  .interview-contact .contact-panel h2{white-space:normal}
+  .interview-contact .contact-panel{padding:24px 22px}
+}
+
+@media(max-width:620px){
+  .interview-contact .contact-data{grid-template-columns:1fr}
+}

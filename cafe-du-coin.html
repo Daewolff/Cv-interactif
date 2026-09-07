@@ -1689,6 +1689,27 @@
       margin-right: auto;
     }
 
+    /* Harmonisation des titres avec le reste du portfolio */
+    .tablet-title{
+      font-size:clamp(2.4rem,4vw,3.25rem);
+      line-height:1.02;
+      letter-spacing:-.045em;
+    }
+
+    .screen-heading h2,
+    .server-heading h2{
+      font-size:clamp(1.65rem,1.75vw,1.75rem);
+      line-height:1.12;
+      letter-spacing:-.025em;
+      white-space:nowrap;
+    }
+
+    @media (max-width:620px){
+      .tablet-title,
+      .screen-heading h2,
+      .server-heading h2{white-space:normal}
+    }
+
   </style>
   <script async src="https://tally.so/widgets/embed.js"></script>
 </head>

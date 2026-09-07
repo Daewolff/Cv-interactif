@@ -1520,3 +1520,43 @@ section p:last-child {
         font-size: 0.82rem;
     }
 }
+
+/* =========================
+   HARMONISATION DES TITRES
+   ========================= */
+
+h1 {
+    font-size: clamp(2.4rem, 4vw, 3.25rem);
+    line-height: 1.02;
+    white-space: nowrap;
+}
+
+h2 {
+    font-size: clamp(1.7rem, 1.75vw, 1.75rem);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    white-space: nowrap;
+}
+
+.apercu-projet {
+    grid-template-columns: 1fr;
+}
+
+.apercu-texte,
+.fonctionnalites-entete,
+.apprentissages-entete,
+.architecture-entete {
+    max-width: none;
+}
+
+@media (max-width: 700px) {
+    h1 {
+        font-size: clamp(2.3rem, 12vw, 3.2rem);
+        white-space: normal;
+    }
+
+    h2 {
+        font-size: clamp(1.55rem, 7vw, 1.9rem);
+        white-space: normal;
+    }
+}

@@ -183,9 +183,10 @@
     }
     h1,h2,h3{margin:0}
     h1{
-      font-size: clamp(2.6rem, 6vw, 5rem);
-      line-height:.98;
-      letter-spacing:-.04em;
+      font-size:clamp(2.4rem,4vw,3.25rem);
+      line-height:1.02;
+      letter-spacing:-.045em;
+      white-space:nowrap;
     }
     h1 em{
       font-style:normal;
@@ -578,6 +579,7 @@
       .page-shell{width:min(calc(100% - 20px), var(--max)); margin-top:22px}
       .site-header{width:min(calc(100% - 20px), var(--max)); top:10px}
       .brand-copy strong{font-size:.86rem}
+      h1{font-size:clamp(2.55rem,14vw,3.45rem);white-space:normal}
       .hero{padding:18px}
       .hero-copy{gap:16px}
       .section-inner{padding:20px}
