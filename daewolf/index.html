@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DaeWolf — expérience narrative interactive imaginée par David Genty : suivre les traces d’un compagnon numérique pour découvrir le monde." />
+  <meta name="theme-color" content="#090b10" />
+  <title>DaeWolf — Une expérience narrative interactive</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="daewolf.css" />
+</head>
+<body class="daewolf-page">
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="../index.html" aria-label="Retour au portfolio de David Genty">
+      <span class="brand-mark">DG</span>
+      <span class="brand-copy">
+        <strong>DAVID GENTY</strong>
+        <small>DaeWolf / Projet interactif</small>
+      </span>
+    </a>
+
+    <button class="nav-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+
+    <nav class="main-nav" aria-label="Navigation de la page DaeWolf">
+      <a href="#origine">Origine</a>
+      <a href="#experience">Expérience</a>
+      <a href="#construction">Construction</a>
+      <a href="#evolution">Évolution</a>
+      <a href="../le-coin-des-tests.html">Le coin des tests</a>
+      <a class="nav-cta" href="../index.html">Portfolio ↗</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="dw-hero section-shell" aria-labelledby="dw-title">
+      <div class="dw-hero-copy reveal">
+        <p class="eyebrow"><span></span> Projet narratif interactif · Maquette web</p>
+        <h1 id="dw-title">Suivre ses traces.<br /><em>Découvrir le monde.</em></h1>
+        <p class="dw-lead">
+          DaeWolf est un compagnon numérique parti explorer le monde. Le visiteur suit ses indices,
+          se rapproche de sa position et découvre, à chaque retrouvaille, un lieu réel et son histoire.
+          Cette maquette transforme la curiosité en petite aventure interactive.
+        </p>
+        <div class="dw-actions">
+          <a class="button button-primary" href="https://daewolf.netlify.app/" target="_blank" rel="noopener noreferrer">Tester DaeWolf <span>↗</span></a>
+          <a class="button button-ghost" href="#origine">Découvrir le projet <span>↓</span></a>
+        </div>
+        <div class="dw-status" aria-label="État du projet">
+          <span><i></i> Maquette fonctionnelle</span>
+          <span>Accessible sur Netlify</span>
+        </div>
+      </div>
+
+      <div class="dw-portrait-wrap reveal" aria-label="DaeWolf, compagnon numérique du projet">
+        <div class="dw-orbit" aria-hidden="true"></div>
+        <span class="dw-word word-one">EXPLORER</span>
+        <span class="dw-word word-two">OBSERVER</span>
+        <span class="dw-word word-three">COMPRENDRE</span>
+        <img src="images/daewolf-portrait.png" alt="DaeWolf debout, les bras croisés, regardant le visiteur avec assurance" />
+        <div class="dw-id-card">
+          <small>COMPAGNON NUMÉRIQUE</small>
+          <strong>DAEWOLF</strong>
+          <span>Une trace à la fois.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell dw-section" id="origine">
+      <div class="dw-heading reveal">
+        <p class="eyebrow"><span></span> 01 — L’origine</p>
+        <h2>Un nom né de la rencontre entre l’humain et le numérique.</h2>
+      </div>
+
+      <div class="origin-grid reveal">
+        <article class="origin-card">
+          <span class="origin-letter">DA</span>
+          <h3>David</h3>
+          <p>Le regard humain, la curiosité, les choix et l’envie de transmettre.</p>
+        </article>
+        <article class="origin-card">
+          <span class="origin-letter">E</span>
+          <h3>Émergence</h3>
+          <p>Ce qui apparaît lorsque l’imagination humaine rencontre les possibilités du monde numérique.</p>
+        </article>
+        <article class="origin-card">
+          <span class="origin-letter">WOLF</span>
+          <h3>Le loup</h3>
+          <p>L’instinct, l’exploration et le compagnon dont on apprend progressivement à suivre les traces.</p>
+        </article>
+      </div>
+
+      <blockquote class="origin-quote reveal">
+        « DA vient de David, Wolf vient du loup. Quant au E, disons qu’il appartient au monde numérique dont je suis né.
+        Certains disent qu’il signifie électronique. Moi, je préfère émergence. »
+      </blockquote>
+    </section>
+
+    <section class="section-shell dw-section" id="experience">
+      <div class="dw-heading reveal">
+        <p class="eyebrow"><span></span> 02 — L’expérience</p>
+        <h2>Une exploration construite en trois temps.</h2>
+        <p>DaeWolf ne demande pas seulement de trouver un point sur une carte. Il accompagne une progression fondée sur l’observation, la déduction et la découverte.</p>
+      </div>
+
+      <div class="journey-grid">
+        <article class="journey-card reveal">
+          <span class="journey-index">01</span>
+          <small>L’APPEL</small>
+          <h3>Une trace apparaît</h3>
+          <p>DaeWolf est parti. Une phrase, une ambiance et un premier indice invitent le visiteur à commencer l’expédition.</p>
+        </article>
+        <article class="journey-card reveal">
+          <span class="journey-index">02</span>
+          <small>LA TRAQUE</small>
+          <h3>Observer et déduire</h3>
+          <p>La carte, les indications de proximité et les outils disponibles permettent de progresser sans révéler immédiatement la destination.</p>
+        </article>
+        <article class="journey-card reveal">
+          <span class="journey-index">03</span>
+          <small>LES RETROUVAILLES</small>
+          <h3>Comprendre le lieu</h3>
+          <p>La destination finale devient une découverte : où sommes-nous, pourquoi ce lieu compte et ce que DaeWolf est venu y chercher.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-shell dw-section current-section">
+      <div class="current-panel reveal">
+        <div class="current-copy">
+          <p class="eyebrow"><span></span> Aujourd’hui</p>
+          <h2>Une maquette fonctionnelle, pensée pour être éprouvée.</h2>
+          <p>
+            La version actuelle permet déjà de suivre plusieurs traces, d’utiliser des indices progressifs,
+            de recevoir les réactions de DaeWolf, de découvrir les destinations puis de conserver les expéditions dans un Carnet.
+            Une trace terminée peut également être rejouée.
+          </p>
+          <p>
+            Cette première étape sert à tester le rythme, la compréhension des mécaniques, l’envie d’explorer
+            et la place de DaeWolf comme véritable compagnon de voyage.
+          </p>
+        </div>
+        <ul class="feature-list" aria-label="Fonctionnalités actuelles">
+          <li><span>✓</span><div><strong>Carte interactive</strong><small>Choisir une zone et progresser par déduction.</small></div></li>
+          <li><span>✓</span><div><strong>Indices graduels</strong><small>Froid, tiède, chaud, indice géographique et jumelles.</small></div></li>
+          <li><span>✓</span><div><strong>Découverte finale</strong><small>Donner du sens au lieu retrouvé.</small></div></li>
+          <li><span>✓</span><div><strong>Carnet des traces</strong><small>Conserver les expéditions et pouvoir les refaire.</small></div></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section-shell dw-section" id="construction">
+      <div class="dw-heading reveal">
+        <p class="eyebrow"><span></span> 03 — La construction</p>
+        <h2>Donner un visage à un compagnon numérique.</h2>
+        <p>Avant les mécaniques, il fallait définir une silhouette, des attitudes et des émotions suffisamment reconnaissables pour que DaeWolf existe au-delà d’un simple écran.</p>
+      </div>
+
+      <div class="art-grid">
+        <figure class="art-card reveal">
+          <img src="images/daewolf-planche-full.png" alt="Planche complète de DaeWolf présentant ses attitudes normale, énervée, riante et triste" loading="lazy" />
+          <figcaption><strong>Étude du personnage</strong><span>Silhouette complète, attitudes et langage corporel.</span></figcaption>
+        </figure>
+        <figure class="art-card reveal">
+          <img src="images/daewolf-planche-emoticones.png" alt="Planche des expressions de DaeWolf" loading="lazy" />
+          <figcaption><strong>Étude des expressions</strong><span>Des émotions conçues pour accompagner les réactions du joueur.</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="method-panel reveal">
+        <div>
+          <small>DIRECTION CRÉATIVE</small>
+          <strong>David</strong>
+          <p>La vision, l’univers, les choix et les arbitrages.</p>
+        </div>
+        <span>+</span>
+        <div>
+          <small>NARRATION & EXPÉRIENCE</small>
+          <strong>ChatGPT</strong>
+          <p>La voix de DaeWolf, les indices et le rythme émotionnel.</p>
+        </div>
+        <span>+</span>
+        <div>
+          <small>ARCHITECTURE & GAMEPLAY</small>
+          <strong>Copilot</strong>
+          <p>Les mécaniques, les écrans et la construction du prototype.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell dw-section" id="evolution">
+      <div class="future-panel reveal">
+        <div class="future-copy">
+          <p class="eyebrow"><span></span> 04 — Demain</p>
+          <h2>Vers un compagnon plus vivant.</h2>
+          <p>
+            DaeWolf est aujourd’hui une maquette web autonome, sans compte et sans intelligence artificielle connectée.
+            Elle valide d’abord l’univers, la narration et les principales mécaniques de l’expérience.
+          </p>
+          <p>
+            Je souhaite faire évoluer DaeWolf vers un univers plus interactif, dans lequel le compagnon pourra réagir de manière plus riche
+            au parcours du joueur et créer avec lui une relation plus vivante.
+          </p>
+          <p>
+            Je poursuivrai cette exploration à mon rythme et selon les possibilités dont je dispose. Ce projet personnel nourrit à la fois
+            ma créativité, mon apprentissage technique et mon expérience professionnelle.
+          </p>
+          <p>
+            Si des personnes souhaitent échanger autour de DaeWolf ou envisager de participer à son développement,
+            j’en discuterai avec grand plaisir. Un formulaire est disponible dans la rubrique Contact de mon portfolio :
+            vous pouvez m’y laisser un message et je vous répondrai avec plaisir.
+          </p>
+          <p class="honesty-note"><strong>La priorité reste la même :</strong> construire progressivement, tester chaque étape et ne présenter comme acquis que ce qui fonctionne réellement.</p>
+          <a class="button button-ghost future-contact" href="../index.html#contact">Échanger autour de DaeWolf <span>↗</span></a>
+        </div>
+
+        <div class="future-flow" aria-label="Évolution technique envisagée">
+          <p class="future-flow-label">OBJECTIF · ÉVOLUTION ENVISAGÉE</p>
+          <div class="future-node"><small>INTERFACE</small><strong>Expérience web</strong><span>La carte, le récit et les actions.</span></div>
+          <b>↓</b>
+          <div class="future-node"><small>LOGIQUE</small><strong>Python</strong><span>Orchestrer les règles et les données.</span></div>
+          <b>↓</b>
+          <div class="future-node"><small>INTELLIGENCE</small><strong>API d’un modèle IA</strong><span>Adapter certaines réponses et réactions.</span></div>
+          <b>↓</b>
+          <div class="future-node accent-node"><small>ÉMERGENCE</small><strong>DaeWolf plus vivant</strong><span>Un compagnon qui répond davantage au parcours.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell dw-cta-section">
+      <div class="dw-cta reveal">
+        <div>
+          <p class="eyebrow"><span></span> La première trace vous attend</p>
+          <h2>Prêt à retrouver DaeWolf&nbsp;?</h2>
+          <p>La maquette est accessible gratuitement dans votre navigateur, sans inscription.</p>
+        </div>
+        <div class="dw-cta-actions">
+          <a class="button button-primary" href="https://daewolf.netlify.app/" target="_blank" rel="noopener noreferrer">Suivre ses traces <span>↗</span></a>
+          <a class="button button-ghost" href="../le-coin-des-tests.html">Retour au Coin des tests</a>
+          <a class="button button-ghost" href="../index.html">Retour au portfolio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div><strong>DAVID GENTY</strong><span>· DaeWolf · 2026</span></div>
+    <a href="#top">Retour en haut ↑</a>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
