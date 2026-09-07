@@ -51,3 +51,44 @@
     white-space:normal;
   }
 }
+
+/* Légende horizontale sous le portrait : aucun élément ne masque DaeWolf */
+.dw-portrait-wrap{
+  padding:0 18px 82px;
+}
+
+.dw-id-card{
+  left:18px;
+  right:18px;
+  bottom:16px;
+  min-width:0;
+  width:auto;
+  display:grid;
+  grid-template-columns:auto auto 1fr;
+  align-items:center;
+  gap:14px;
+  padding:12px 16px;
+}
+
+.dw-id-card strong{
+  padding-inline:14px;
+  border-inline:1px solid rgba(56,239,255,.14);
+}
+
+.dw-id-card span{text-align:right}
+
+@media(max-width:520px){
+  .dw-portrait-wrap{padding:0 12px 104px}
+
+  .dw-id-card{
+    left:12px;
+    right:12px;
+    bottom:12px;
+    grid-template-columns:1fr auto;
+    gap:3px 12px;
+    padding:12px 14px;
+  }
+
+  .dw-id-card small{grid-column:1 / -1}
+  .dw-id-card strong{padding:0;border:0}
+}
